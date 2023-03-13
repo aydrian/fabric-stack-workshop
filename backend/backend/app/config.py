@@ -1,8 +1,10 @@
-from pydantic import BaseSettings
+from pydantic import BaseSettings, PostgresDsn, Field
 
 
 class Settings(BaseSettings):
-    DATABASE_URL: str
+    DATABASE_URL: PostgresDsn = Field(env="DATABASE_URL")
+    SECRET_KEY: str = Field(env="SECRET_KEY")
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = Field(env="ACCESS_TOKEN_EXPIRE_MINUTES")
 
     class Config:
         env_file = ".env"
