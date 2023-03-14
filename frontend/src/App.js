@@ -4,7 +4,7 @@ import PrivateLayout from "./components/private-layout";
 import PublicLayout from "./components/public-layout";
 
 import AdminPage from "./pages/admin";
-import DashboardPage from "./pages/dashboard";
+import ProfilePage from "./pages/profile";
 import LoginPage from "./pages/login";
 import SignupPage from "./pages/signup";
 import "./App.css";
@@ -18,7 +18,7 @@ function App() {
       </Route>
       <Route element={<PrivateLayout />}>
         <Route path="admin" element={<AdminPage />} />
-        <Route path="dashboard" element={<DashboardPage />} />
+        <Route path="profile" element={<ProfilePage />} />
       </Route>
     </Routes>
   );
