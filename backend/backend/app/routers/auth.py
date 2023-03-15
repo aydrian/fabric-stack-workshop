@@ -15,7 +15,7 @@ router = APIRouter(prefix="/auth")
 def login(
     response: Response,
     form_data: OAuth2PasswordRequestForm = Depends(),
-    db: Connection = Depends(get_db),
+    db=None,  #: Connection = Depends(get_db),
 ) -> Token:
     """
     Logs in the user provided by form_data.username and form_data.password

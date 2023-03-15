@@ -1,22 +1,23 @@
 import React from "react";
+import useSWR from "swr";
 
-const fakeUser = {
-  id: "b3a23e83-dd46-47ce-aefc-695bf8f347c3",
-  username: "craig",
-  full_name: "Craig Cockroach",
-  is_admin: true,
-  created_at: new Date(),
-  updated_at: new Date()
-};
+const fetcher = (url) =>
+  fetch(url, { credentials: "include" }).then((res) => res.json());
 
 export default function ProfilePage() {
-  const [user, setUser] = React.useState(fakeUser);
+  const { data, error, isLoading } = useSWR(
+    "http://localhost:8000/users/me",
+    fetcher
+  );
+
+  if (error) return "An error has occurred.";
+  if (isLoading) return "Loading...";
   return (
     <>
       <h2>Profile</h2>
-      <img src="https://picsum.photos/200" />
-      <h3>{user.username}</h3>
-      <h4>{user.full_name}</h4>
+      <img src="https://picsum.photos/200" alt={`${data.username} avatar`} />
+      <h3>{data.username}</h3>
+      <h4>{data.full_name}</h4>
     </>
   );
 }

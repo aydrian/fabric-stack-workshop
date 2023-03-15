@@ -4,7 +4,7 @@ fakeUser = {
     "id": "FAKE_ID",
     "username": "craig",
     "full_name": "Craig Cockroach",
-    "password_hash": "password-hash",
+    "password_hash": "$2b$12$kREeBl1JQVjqqeM9U898YOozGI2mtdPC9dBu.fnHyYfIDRvEl.XAG",
 }
 
 
