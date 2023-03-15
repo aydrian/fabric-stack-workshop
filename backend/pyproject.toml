@@ -9,10 +9,9 @@ readme = "README.md"
 python = "^3.11"
 fastapi = "^0.94.0"
 uvicorn = {extras = ["standard"], version = "^0.21.0"}
-python-jose = {extras = ["cryptography"], version = "^3.3.0"}
-passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 psycopg = {extras = ["binary"], version = "^3.1.8"}
 python-multipart = "^0.0.6"
+fastapi-login = "^1.8.3"
 
 
 [tool.poetry.group.dev.dependencies]

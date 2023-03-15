@@ -1,13 +1,12 @@
 from fastapi import APIRouter, Depends
 
-from ..database.models.users import fakeUser, User, UserInDB
-from ..dependencies import oauth2_scheme
+from app.database.models import fakeUser, User, UserInDB
+from app.security import manager
 
 
 router = APIRouter(
     prefix="/users",
     tags=["users"],
-    dependencies=[Depends(oauth2_scheme)],
     responses={
         404: {"description": "Not found"},
     },
@@ -20,7 +19,7 @@ async def read_users() -> list[User]:
 
 
 @router.get("/me")
-async def read_user_me() -> User:
+async def read_user_me(active_user=Depends(manager)) -> User:
     return fakeUser
 
 

@@ -1,24 +1,32 @@
-from datetime import timedelta
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, Response
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi_login.exceptions import InvalidCredentialsException
+from psycopg import Connection
 
-from ..config import settings
-from ..security.security import authenticate_user, create_access_token, Token
+from app.database import get_db
+from app.database.actions import get_user_by_username
+from app.models.auth import Token
+from app.security import verify_password, manager
 
 router = APIRouter(prefix="/auth")
 
 
 @router.post("/login", response_model=Token)
-async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = authenticate_user(form_data.username, form_data.password)
+def login(
+    response: Response,
+    form_data: OAuth2PasswordRequestForm = Depends(),
+    db: Connection = Depends(get_db),
+) -> Token:
+    """
+    Logs in the user provided by form_data.username and form_data.password
+    """
+    user = get_user_by_username(form_data.username, db)
     if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
-    )
-    return {"access_token": access_token, "token_type": "bearer"}
+        raise InvalidCredentialsException
+
+    if not verify_password(form_data.password, user.password_hash):
+        raise InvalidCredentialsException
+
+    token = manager.create_access_token(data={"sub": user.username})
+    manager.set_cookie(response, token)
+    return Token(access_token=token, token_type="bearer")
