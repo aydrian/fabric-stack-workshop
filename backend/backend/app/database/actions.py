@@ -3,7 +3,7 @@ from psycopg import Connection
 
 from app.models.auth import UserRegister
 from app.database import get_db
-from app.database.models import User, UserInDB, fakeUser
+from app.database.models import User, UserInDB, users
 from app.security import manager
 
 
@@ -28,7 +28,7 @@ def get_user_by_username(
     # if db is None:
     #     db = next(conn_provider())
 
-    user = UserInDB(**fakeUser)
+    user = next((user for user in users if user.username == username), None)
     return user
 
 

@@ -10,10 +10,3 @@ class UserResponse(BaseResponse):
 
 class ListUsersResponse(ListResponse):
     users: list[User]
-
-
-class AuthUser(BaseModel):
-    id: str
-    username: str
-    full_name: str
-    is_admin: bool = False

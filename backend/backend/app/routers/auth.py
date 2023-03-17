@@ -6,7 +6,7 @@ from psycopg import Connection
 from app.database import get_db
 from app.database.actions import create_user, get_user_by_username
 from app.models.common import BaseResponse
-from app.models.auth import AuthResponse, AuthUser, UserRegister
+from app.models.auth import AuthResponse, UserRegister
 from app.security import verify_password, manager
 
 router = APIRouter(prefix="/auth")
@@ -22,6 +22,7 @@ def login(
     Logs in the user provided by form_data.username and form_data.password
     """
     user = get_user_by_username(form_data.username, db)
+
     if not user:
         raise InvalidCredentialsException
 
@@ -34,12 +35,7 @@ def login(
         ok=True,
         access_token=token,
         token_type="bearer",
-        user=AuthUser(
-            id=user.id,
-            username=user.username,
-            full_name=user.full_name,
-            is_admin=user.is_admin,
-        ),
+        user=user,
     )
 
 
@@ -68,5 +64,5 @@ def register(
         ok=True,
         access_token=token,
         token_type="bearer",
-        user=AuthUser(**user),
+        user=user,
     )

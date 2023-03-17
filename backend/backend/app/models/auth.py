@@ -1,13 +1,13 @@
 from pydantic import BaseModel
 
 from .common import BaseResponse
-from .users import AuthUser
+from app.database.models import User
 
 
 class AuthResponse(BaseResponse):
     access_token: str
     token_type: str = "bearer"
-    user: AuthUser
+    user: User
 
 
 class UserRegister(BaseModel):
