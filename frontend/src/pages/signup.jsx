@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth";
 
 export default function SignupPage() {
+  const { onRegister } = useAuth();
   const id = React.useId();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -13,13 +15,18 @@ export default function SignupPage() {
   const confirmPasswordId = `confirmPassword-${id}`;
   const fullnameId = `fullname-${id}`;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormMessage("");
     if (password !== confirmPassword) {
       return setFormMessage("Passwords must match");
     }
-    console.log({ fullname, username, password, confirmPassword });
+
+    try {
+      await onRegister(username, password, fullname);
+    } catch (err) {
+      return setFormMessage(err.detail);
+    }
   };
 
   return (

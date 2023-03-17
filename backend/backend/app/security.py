@@ -1,8 +1,14 @@
+from datetime import timedelta
 from fastapi_login import LoginManager
 
 from .config import settings
 
-manager = LoginManager(settings.SECRET_KEY, settings.token_url, use_cookie=True)
+manager = LoginManager(
+    settings.SECRET_KEY,
+    settings.token_url,
+    use_cookie=True,
+    default_expiry=timedelta(hours=12),
+)
 
 
 def hash_password(plaintext: str):

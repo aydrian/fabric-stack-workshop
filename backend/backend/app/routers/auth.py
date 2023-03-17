@@ -1,22 +1,23 @@
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Response, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi_login.exceptions import InvalidCredentialsException
 from psycopg import Connection
 
 from app.database import get_db
-from app.database.actions import get_user_by_username
-from app.models.auth import Token
+from app.database.actions import create_user, get_user_by_username
+from app.models.common import BaseResponse
+from app.models.auth import AuthResponse, AuthUser, UserRegister
 from app.security import verify_password, manager
 
 router = APIRouter(prefix="/auth")
 
 
-@router.post("/login", response_model=Token)
+@router.post("/login", response_model=AuthResponse)
 def login(
     response: Response,
     form_data: OAuth2PasswordRequestForm = Depends(),
     db=None,  #: Connection = Depends(get_db),
-) -> Token:
+) -> AuthResponse:
     """
     Logs in the user provided by form_data.username and form_data.password
     """
@@ -29,4 +30,43 @@ def login(
 
     token = manager.create_access_token(data={"sub": user.username})
     manager.set_cookie(response, token)
-    return Token(access_token=token, token_type="bearer")
+    return AuthResponse(
+        ok=True,
+        access_token=token,
+        token_type="bearer",
+        user=AuthUser(
+            id=user.id,
+            username=user.username,
+            full_name=user.full_name,
+            is_admin=user.is_admin,
+        ),
+    )
+
+
+@router.get("/logout", response_model=BaseResponse)
+def logout(response: Response) -> BaseResponse:
+    response.delete_cookie(manager.cookie_name)
+    return BaseResponse(ok=True)
+
+
+@router.post("/register", response_model=AuthResponse)
+def register(
+    response: Response,
+    newUser: UserRegister,
+    db=None,  #: Connection = Depends(get_db),
+) -> AuthResponse:
+    if get_user_by_username(newUser.username, db):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Username already exists"
+        )
+
+    user = create_user(newUser, db)
+
+    token = manager.create_access_token(data={"sub": user.username})
+    manager.set_cookie(response, token)
+    return AuthResponse(
+        ok=True,
+        access_token=token,
+        token_type="bearer",
+        user=AuthUser(**user),
+    )

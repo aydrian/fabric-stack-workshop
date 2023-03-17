@@ -1,8 +1,9 @@
 from typing import Callable, Iterator, Optional
 from psycopg import Connection
 
+from app.models.auth import UserRegister
 from app.database import get_db
-from app.database.models import UserInDB, fakeUser
+from app.database.models import User, UserInDB, fakeUser
 from app.security import manager
 
 
@@ -28,4 +29,14 @@ def get_user_by_username(
     #     db = next(conn_provider())
 
     user = UserInDB(**fakeUser)
+    return user
+
+
+def create_user(newUser: UserRegister, db: Optional[Connection] = None) -> User:
+    user = User(
+        id="61cb7fca-24a4-47e3-8eff-35acbbb22642",
+        username=newUser.username,
+        full_name=newUser.full_name,
+        is_admin=False,
+    )
     return user

@@ -1,8 +1,9 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth";
 
 export default function LoginPage() {
-  const navigate = useNavigate();
+  const { onLogin } = useAuth();
   const id = React.useId();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -11,16 +12,7 @@ export default function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ username, password });
-    const data = new URLSearchParams({ username, password });
-    const response = await fetch(`http://localhost:8000/auth/login`, {
-      method: "post",
-      body: data,
-      credentials: "include"
-    });
-    const payload = await response.json();
-    console.log({ payload });
-    navigate("/profile");
+    await onLogin(username, password);
   };
 
   return (
