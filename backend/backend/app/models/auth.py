@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from .common import BaseResponse
+from app.models.common import BaseResponse
 from app.database.models import User
 
 

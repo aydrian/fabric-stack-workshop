@@ -1,7 +1,14 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 
 from app.models.users import ListUsersResponse, UserResponse
-from app.database.models import users, UserInDB
+from app.database.models import UserInDB
+from app.database.actions import (
+    get_users,
+    get_user_by_id,
+    create_user,
+    update_user,
+    delete_user,
+)
 from app.security import manager
 
 
@@ -15,32 +22,65 @@ router = APIRouter(
 
 
 @router.get("/")
-async def read_users() -> ListUsersResponse:
+async def read_users(
+    active_user=Depends(manager),
+    db=None,  #: Connection = Depends(get_db),
+) -> ListUsersResponse:
+    if not active_user.is_admin:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Permission denied"
+        )
+    users = get_users(db)
     return ListUsersResponse(ok=True, users=users, count=len(users))
 
 
 @router.get("/me")
 async def read_user_me(active_user=Depends(manager)) -> UserResponse:
-    user = next((user for user in users if user.username == active_user.username), None)
-    return UserResponse(ok=True, user=user)
+    return UserResponse(ok=True, user=active_user)
 
 
 @router.get("/{user_id}")
-async def read_user(user_id: str) -> UserResponse:
-    user = next((user for user in users if user.id == user_id), None)
+async def read_user(
+    user_id: str,
+    active_user=Depends(manager),
+    db=None,  #: Connection = Depends(get_db),
+) -> UserResponse:
+    user = get_user_by_id(user_id, db)
     return UserResponse(ok=True, user=user)
 
 
 @router.post("/")
-async def create_user(user: UserInDB) -> UserResponse:
-    return UserResponse(ok=True, user=users[0])
+async def create_user(
+    user: UserInDB,
+    db=None,  #: Connection = Depends(get_db),
+) -> UserResponse:
+    new_user = create_user(user, db)
+    return UserResponse(ok=True, user=new_user)
 
 
 @router.put("/{user_id}")
-async def update_user(user_id: str, user: UserInDB) -> UserResponse:
-    return UserResponse(ok=True, user=users[0])
+async def update_user(
+    user_id: str,
+    user: UserInDB,
+    active_user=Depends(manager),
+    db=None,  #: Connection = Depends(get_db),
+) -> UserResponse:
+    if not active_user.is_admin or active_user.id != user_id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Permission denied"
+        )
+    upd_user = update_user(user_id, user, db)
+    return UserResponse(ok=True, user=upd_user)
 
 
 @router.delete("/{user_id}")
-async def delete_user(user_id: str) -> None:
-    return
+async def delete_user(
+    user_id: str,
+    active_user=Depends(manager),
+    db=None,  #: Connection = Depends(get_db),
+) -> None:
+    if not active_user.is_admin:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Permission denied"
+        )
+    return delete_user(user_id)

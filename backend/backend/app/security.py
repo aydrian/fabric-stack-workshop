@@ -1,7 +1,7 @@
 from datetime import timedelta
 from fastapi_login import LoginManager
 
-from .config import settings
+from app.config import settings
 
 manager = LoginManager(
     settings.SECRET_KEY,

@@ -1,7 +1,5 @@
-from pydantic import BaseModel
-
-from .common import BaseResponse, ListResponse
-from ..database.models import User
+from app.models.common import BaseResponse, ListResponse
+from app.database.models import User
 
 
 class UserResponse(BaseResponse):

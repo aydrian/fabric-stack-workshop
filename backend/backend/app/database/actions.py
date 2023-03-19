@@ -32,6 +32,14 @@ def get_user_by_username(
     return user
 
 
+def get_users(db: Optional[Connection] = None):
+    return users
+
+
+def get_user_by_id(user_id: str, db: Optional[Connection] = None):
+    return next((user for user in users if user.id == user_id), None)
+
+
 def create_user(newUser: UserRegister, db: Optional[Connection] = None) -> User:
     user = User(
         id="61cb7fca-24a4-47e3-8eff-35acbbb22642",
@@ -40,3 +48,11 @@ def create_user(newUser: UserRegister, db: Optional[Connection] = None) -> User:
         is_admin=False,
     )
     return user
+
+
+def update_user(user_id: str, user: UserInDB, db: Optional[Connection] = None) -> User:
+    return next((user for user in users if user.id == user_id), None)
+
+
+def delete_user(user_id: str):
+    return
