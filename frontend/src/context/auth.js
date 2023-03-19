@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 
+import { useSessionStorage } from "../hooks/use-session-storage";
 import * as AuthService from "../services/auth";
 
 const AuthContext = React.createContext(null);
@@ -19,20 +20,17 @@ export const AuthProvider = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [token, setToken] = React.useState(null);
-  const [user, setUser] = React.useState(null);
+  const [session, setSession] = useSessionStorage("auth_session", null);
 
   const handleRegister = async (username, password, full_name) => {
     const response = await AuthService.register(username, password, full_name);
-    setToken(response.access_token);
-    setUser(response.user);
+    setSession({ token: response.access_token, user: response.user });
     navigate(homePage);
   };
 
   const handleLogin = async (username, password) => {
     const response = await AuthService.login(username, password);
-    setToken(response.access_token);
-    setUser(response.user);
+    setSession({ token: response.access_token, user: response.user });
 
     const origin = location.state?.from?.pathname || homePage;
     navigate(origin);
@@ -40,29 +38,34 @@ export const AuthProvider = ({
 
   const handleLogout = () => {
     AuthService.logout().then(() => {
-      setToken(null);
-      setUser(null);
+      setSession(null);
       navigate(loginPage);
     });
   };
 
   const value = {
-    token,
-    user,
+    token: session?.token,
+    user: session?.user,
     onRegister: handleRegister,
     onLogin: handleLogin,
-    onLogout: handleLogout
+    onLogout: handleLogout,
+    loginPage,
+    homePage
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-export const ProtectedRoute = ({ children }) => {
-  const { token } = useAuth();
+export const ProtectedRoute = ({ children, isAdmin = false }) => {
+  const { homePage, loginPage, token, user } = useAuth();
   const location = useLocation();
 
   if (!token) {
-    return <Navigate to="/" replace state={{ from: location }} />;
+    return <Navigate to={loginPage} replace state={{ from: location }} />;
+  }
+
+  if (isAdmin && !user?.is_admin) {
+    return <Navigate to={homePage} replace />;
   }
 
   return children ? children : <Outlet />;

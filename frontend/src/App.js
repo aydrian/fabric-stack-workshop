@@ -19,7 +19,7 @@ function App() {
         <Route path="signup" element={<SignupPage />} />
       </Route>
       <Route element={<PrivateLayout />}>
-        <Route element={<ProtectedRoute />}>
+        <Route element={<ProtectedRoute isAdmin />}>
           <Route path="admin" element={<AdminPage />} />
         </Route>
         <Route element={<ProtectedRoute />}>
