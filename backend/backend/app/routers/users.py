@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from psycopg import Connection
 
-from app.models.users import ListUsersResponse, UserResponse
+from app.database import get_db
 from app.database.models import UserInDB
 from app.database.actions import (
     get_users,
@@ -10,6 +10,7 @@ from app.database.actions import (
     update_user,
     delete_user,
 )
+from app.models.users import ListUsersResponse, UserResponse
 from app.security import manager
 
 
@@ -25,7 +26,7 @@ router = APIRouter(
 @router.get("/")
 async def read_users(
     active_user=Depends(manager),
-    db=None,  #: Connection = Depends(get_db),
+    db: Connection = Depends(get_db),
 ) -> ListUsersResponse:
     if not active_user.is_admin:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
@@ -42,7 +43,7 @@ async def read_user_me(active_user=Depends(manager)) -> UserResponse:
 async def read_user(
     user_id: str,
     active_user=Depends(manager),
-    db=None,  #: Connection = Depends(get_db),
+    db: Connection = Depends(get_db),
 ) -> UserResponse:
     if not active_user.is_admin or active_user.id != user_id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
@@ -55,7 +56,7 @@ async def read_user(
 @router.post("/")
 async def create_user(
     user: UserInDB,
-    db=None,  #: Connection = Depends(get_db),
+    db: Connection = Depends(get_db),
 ) -> UserResponse:
     new_user = create_user(user, db)
     return UserResponse(ok=True, user=new_user)
@@ -66,7 +67,7 @@ async def update_user(
     user_id: str,
     user: UserInDB,
     active_user=Depends(manager),
-    db=None,  #: Connection = Depends(get_db),
+    db: Connection = Depends(get_db),
 ) -> UserResponse:
     if not active_user.is_admin or active_user.id != user_id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
@@ -78,7 +79,7 @@ async def update_user(
 async def delete_user(
     user_id: str,
     active_user=Depends(manager),
-    db=None,  #: Connection = Depends(get_db),
+    db: Connection = Depends(get_db),
 ) -> None:
     if not active_user.is_admin:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")

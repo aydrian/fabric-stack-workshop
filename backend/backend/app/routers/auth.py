@@ -16,7 +16,7 @@ router = APIRouter(prefix="/auth")
 def login(
     response: Response,
     form_data: OAuth2PasswordRequestForm = Depends(),
-    db=None,  #: Connection = Depends(get_db),
+    db: Connection = Depends(get_db),
 ) -> AuthResponse:
     """
     Logs in the user provided by form_data.username and form_data.password
@@ -49,7 +49,7 @@ def logout(response: Response) -> BaseResponse:
 def register(
     response: Response,
     newUser: UserRegister,
-    db=None,  #: Connection = Depends(get_db),
+    db: Connection = Depends(get_db),
 ) -> AuthResponse:
     if get_user_by_username(newUser.username, db):
         raise HTTPException(

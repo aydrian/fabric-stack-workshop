@@ -3,7 +3,8 @@ from psycopg import Connection
 
 from app.models.auth import UserRegister
 from app.database import get_db
-from app.database.models import User, UserInDB, users
+from app.database.mock_data import users
+from app.database.models import User, UserInDB
 from app.security import manager
 
 
@@ -22,25 +23,25 @@ def get_user_by_username(
     Returns:
         The user object or none
     """
-    # if db is None and conn_provider is None:
-    #     raise ValueError("db and conn_provider cannot both be None.")
+    if db is None and conn_provider is None:
+        raise ValueError("db and conn_provider cannot both be None.")
 
-    # if db is None:
-    #     db = next(conn_provider())
+    if db is None:
+        db = next(conn_provider())
 
     user = next((user for user in users if user.username == username), None)
     return user
 
 
-def get_users(db: Optional[Connection] = None):
+def get_users(db: Connection = None):
     return users
 
 
-def get_user_by_id(user_id: str, db: Optional[Connection] = None):
+def get_user_by_id(user_id: str, db: Connection):
     return next((user for user in users if user.id == user_id), None)
 
 
-def create_user(newUser: UserRegister, db: Optional[Connection] = None) -> User:
+def create_user(newUser: UserRegister, db: Connection) -> User:
     user = User(
         id="61cb7fca-24a4-47e3-8eff-35acbbb22642",
         username=newUser.username,
@@ -50,9 +51,9 @@ def create_user(newUser: UserRegister, db: Optional[Connection] = None) -> User:
     return user
 
 
-def update_user(user_id: str, user: UserInDB, db: Optional[Connection] = None) -> User:
+def update_user(user_id: str, user: UserInDB, db: Connection) -> User:
     return next((user for user in users if user.id == user_id), None)
 
 
-def delete_user(user_id: str):
+def delete_user(user_id: str, db: Connection):
     return

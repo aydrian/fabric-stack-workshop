@@ -7,7 +7,7 @@ manager = LoginManager(
     settings.SECRET_KEY,
     settings.token_url,
     use_cookie=True,
-    default_expiry=timedelta(hours=12),
+    default_expiry=timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES),
 )
 
 

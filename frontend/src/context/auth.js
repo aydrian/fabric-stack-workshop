@@ -40,7 +40,6 @@ export const AuthProvider = ({
 
   const handleLogout = () => {
     AuthService.logout().then(() => {
-      console.log("hello", loginPage);
       setToken(null);
       setUser(null);
       navigate(loginPage);
