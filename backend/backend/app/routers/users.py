@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from psycopg import Connection
 
 from app.models.users import ListUsersResponse, UserResponse
 from app.database.models import UserInDB
@@ -27,9 +28,7 @@ async def read_users(
     db=None,  #: Connection = Depends(get_db),
 ) -> ListUsersResponse:
     if not active_user.is_admin:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Permission denied"
-        )
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
     users = get_users(db)
     return ListUsersResponse(ok=True, users=users, count=len(users))
 
@@ -45,7 +44,11 @@ async def read_user(
     active_user=Depends(manager),
     db=None,  #: Connection = Depends(get_db),
 ) -> UserResponse:
+    if not active_user.is_admin or active_user.id != user_id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
     user = get_user_by_id(user_id, db)
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not Found")
     return UserResponse(ok=True, user=user)
 
 
@@ -66,9 +69,7 @@ async def update_user(
     db=None,  #: Connection = Depends(get_db),
 ) -> UserResponse:
     if not active_user.is_admin or active_user.id != user_id:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Permission denied"
-        )
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
     upd_user = update_user(user_id, user, db)
     return UserResponse(ok=True, user=upd_user)
 
@@ -80,7 +81,5 @@ async def delete_user(
     db=None,  #: Connection = Depends(get_db),
 ) -> None:
     if not active_user.is_admin:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Permission denied"
-        )
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
     return delete_user(user_id)
