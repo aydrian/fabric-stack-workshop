@@ -1,5 +1,7 @@
 import React from "react";
 import useSWR from "swr";
+import { Helmet } from "react-helmet";
+import { SITE_NAME } from "../config";
 
 import * as UserService from "../services/user";
 import { fetcher } from "../services";
@@ -23,6 +25,7 @@ export default function AdminPage() {
 
   return (
     <>
+      <Helmet title={`${SITE_NAME}: Admin`} />
       <h2>Admin</h2>
       {data?.users ? (
         <section>

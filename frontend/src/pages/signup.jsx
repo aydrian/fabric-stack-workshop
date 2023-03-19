@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth";
+import { Helmet } from "react-helmet";
+import { SITE_NAME } from "../config";
 
 export default function SignupPage() {
   const { onRegister } = useAuth();
@@ -31,6 +33,7 @@ export default function SignupPage() {
 
   return (
     <>
+      <Helmet title={`${SITE_NAME}: Sign up`} />
       <h2>Sign up</h2>
       <form onSubmit={handleSubmit}>
         {formMessage.length > 0 ? <div>{formMessage}</div> : null}

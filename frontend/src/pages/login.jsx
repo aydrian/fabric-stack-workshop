@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { SITE_NAME } from "../config";
 import { useAuth } from "../context/auth";
 
 export default function LoginPage() {
@@ -17,6 +19,7 @@ export default function LoginPage() {
 
   return (
     <>
+      <Helmet title={SITE_NAME} />
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>

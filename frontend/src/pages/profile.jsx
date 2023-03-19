@@ -1,5 +1,7 @@
 import React from "react";
 import useSWR from "swr";
+import { Helmet } from "react-helmet";
+import { SITE_NAME } from "../config";
 
 import { fetcher } from "../services";
 import { CURRENT_USER_ENDPOINT } from "../services/user";
@@ -11,6 +13,7 @@ export default function ProfilePage() {
   if (isLoading) return "Loading...";
   return (
     <>
+      <Helmet title={`${SITE_NAME}: My Profile`} />
       <h2>Profile</h2>
       <img
         src="https://picsum.photos/200"
