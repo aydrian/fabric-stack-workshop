@@ -49,21 +49,22 @@ export default function AdminPage() {
                   <tr key={user.id}>
                     <td>{user.username}</td>
                     <td>{user.full_name}</td>
-                    <td>{user.is_admin.toString()}</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={user.is_admin}
+                        onClick={() =>
+                          handleToggleAdmin(user.id, user.is_admin)
+                        }
+                        title={`${user.is_admin ? "Remove" : "Make"} Admin`}
+                      />
+                    </td>
                     <td>
                       <button
                         type="button"
                         onClick={() => handleDelete(user.id)}
                       >
                         Delete
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          handleToggleAdmin(user.id, user.is_admin)
-                        }
-                      >
-                        {`${user.is_admin ? "Revoke" : "Grant"}`} Admin
                       </button>
                     </td>
                   </tr>
