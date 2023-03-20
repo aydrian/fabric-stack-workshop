@@ -3,11 +3,15 @@ import useSWR from "swr";
 import { Helmet } from "react-helmet";
 import { SITE_NAME } from "../config";
 
+import { useAuth } from "../context/auth";
 import { fetcher } from "../services";
 import { CURRENT_USER_ENDPOINT } from "../services/user";
 
 export default function ProfilePage() {
-  const { data, error, isLoading } = useSWR(CURRENT_USER_ENDPOINT, fetcher);
+  const { onUnauthorized } = useAuth();
+  const { data, error, isLoading } = useSWR(CURRENT_USER_ENDPOINT, fetcher, {
+    onError: onUnauthorized
+  });
 
   if (error) return "An error has occurred.";
   if (isLoading) return "Loading...";

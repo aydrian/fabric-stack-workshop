@@ -1,7 +1,7 @@
+import { AuthorizationError } from "./auth";
+
 export const fetcher = (url) =>
-  fetch(url, { credentials: "include" })
-    .then(parseJson)
-    .catch(handleUnauthorized);
+  fetch(url, { credentials: "include" }).then(parseJson);
 
 export const parseJson = (response) => {
   if (response.status === 401) {
@@ -15,18 +15,3 @@ export const parseJson = (response) => {
     return json;
   });
 };
-
-export const handleUnauthorized = (err) => {
-  console.log(err);
-  if (typeof err === AuthorizationError) {
-    window.location.href = "/";
-  }
-  throw err;
-};
-
-export class AuthorizationError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "AuthorizationError";
-  }
-}

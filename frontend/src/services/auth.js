@@ -1,6 +1,14 @@
 import { API_BASE_URL } from "../config";
 import { parseJson } from ".";
 
+export class AuthorizationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "AuthorizationError";
+    this.status = 401;
+  }
+}
+
 export const register = (username, password, full_name) => {
   return fetch(`${API_BASE_URL}/auth/register`, {
     method: "POST",

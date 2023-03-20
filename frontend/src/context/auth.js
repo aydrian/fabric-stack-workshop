@@ -6,8 +6,6 @@ import * as AuthService from "../services/auth";
 
 const AuthContext = React.createContext(null);
 
-// TODO: Handle expired token
-
 export const useAuth = () => {
   return React.useContext(AuthContext);
 };
@@ -43,12 +41,22 @@ export const AuthProvider = ({
     });
   };
 
+  const handleUnauthorized = (err) => {
+    if (err instanceof AuthService.AuthorizationError) {
+      const loginMsg = "Session expired. Please log in again.";
+      setSession(null);
+      return navigate(loginPage, { state: { from: location, loginMsg } });
+    }
+    throw err;
+  };
+
   const value = {
     token: session?.token,
     user: session?.user,
     onRegister: handleRegister,
     onLogin: handleLogin,
     onLogout: handleLogout,
+    onUnauthorized: handleUnauthorized,
     loginPage,
     homePage
   };

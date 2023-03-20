@@ -3,20 +3,24 @@ import useSWR from "swr";
 import { Helmet } from "react-helmet";
 import { SITE_NAME } from "../config";
 
+import { useAuth } from "../context/auth";
 import * as UserService from "../services/user";
 import { fetcher } from "../services";
 import { USERS_ENDPOINT } from "../services/user";
 
 export default function AdminPage() {
-  const { data, error, isLoading, mutate } = useSWR(USERS_ENDPOINT, fetcher);
+  const { onUnauthorized } = useAuth();
+  const { data, error, isLoading, mutate } = useSWR(USERS_ENDPOINT, fetcher, {
+    onError: onUnauthorized
+  });
 
   const handleDelete = async (id) => {
-    await UserService.delUser(id);
+    await UserService.delUser(id).catch(onUnauthorized);
     mutate();
   };
 
   const handleToggleAdmin = async (id, is_admin) => {
-    await UserService.setAdmin(!is_admin);
+    await UserService.setAdmin(id, !is_admin).catch(onUnauthorized);
     mutate();
   };
 

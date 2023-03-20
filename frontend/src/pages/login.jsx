@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { SITE_NAME } from "../config";
 import { useAuth } from "../context/auth";
 
 export default function LoginPage() {
+  const location = useLocation();
   const { onLogin } = useAuth();
   const id = React.useId();
   const [username, setUsername] = React.useState("");
@@ -21,6 +22,9 @@ export default function LoginPage() {
     <>
       <Helmet title={SITE_NAME} />
       <h2>Login</h2>
+      {location.state?.loginMsg ? (
+        <div style={{ color: "red" }}>{location.state?.loginMsg}</div>
+      ) : null}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor={usernameId}>Username:</label>
