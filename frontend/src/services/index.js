@@ -18,6 +18,9 @@ export const parseJson = (response) => {
 
 export const handleUnauthorized = (err) => {
   console.log(err);
+  if (typeof err === AuthorizationError) {
+    window.location.href = "/";
+  }
   throw err;
 };
 
