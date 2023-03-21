@@ -10,7 +10,7 @@ from app.database.actions import (
     update_user,
     delete_user,
 )
-from app.models.users import ListUsersResponse, UserResponse
+from app.models.users import ListUsersResponse, UserResponse, UserCreate, UserUpdate
 from app.security import manager
 
 
@@ -55,7 +55,7 @@ async def read_user(
 
 @router.post("/")
 async def create_user(
-    user: UserInDB,
+    user: UserCreate,
     db: Connection = Depends(get_db),
 ) -> UserResponse:
     new_user = create_user(user, db)
@@ -65,7 +65,7 @@ async def create_user(
 @router.put("/{user_id}")
 async def update_user(
     user_id: str,
-    user: UserInDB,
+    user: UserUpdate,
     active_user=Depends(manager),
     db: Connection = Depends(get_db),
 ) -> UserResponse:
