@@ -47,25 +47,17 @@ def get_user_by_id(user_id: str, db: Connection) -> User:
 
 def create_user(newUser: UserRegister, db: Connection) -> User:
     password_hash = hash_password(newUser.password)
-    # user = MockData.create_user(
-    #     UserInDB(
-    #         username=newUser.username,
-    #         full_name=newUser.full_name,
-    #         password_hash=password_hash,
-    #     )
-    # )
-    with db.cursor() as cur:
-        cur.execute(
-            """
-            INSERT INTO users (username, password_hash, full_name)
-            VALUES (%s, %s, %s)
-            RETURNING id;
-            """,
-            (newUser.username, password_hash, newUser.full_name),
-        )
-        id = str(cur.fetchone()["id"])
-        db.commit()
-        return User(id=id, username=newUser.username, full_name=newUser.full_name)
+    cur = db.execute(
+        """
+        INSERT INTO users (username, password_hash, full_name)
+        VALUES (%s, %s, %s)
+        RETURNING id;
+        """,
+        (newUser.username, password_hash, newUser.full_name),
+    )
+    id = cur.fetchone()["id"]
+    db.commit()
+    return User(id=id, username=newUser.username, full_name=newUser.full_name)
 
 
 def update_user(user_id: str, user: UserUpdate, db: Connection) -> User:
