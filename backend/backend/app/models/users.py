@@ -13,14 +13,9 @@ class ListUsersResponse(ListResponse):
     users: list[User]
 
 
-class UserCreate(BaseModel):
-    username: str
-    full_name: str
-    password: str
-
-
 class UserUpdate(BaseModel):
     username: Optional[str]
     full_name: Optional[str]
     password: Optional[str]
     is_admin: Optional[bool]
+    password_hash: Optional[str]

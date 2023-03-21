@@ -1,11 +1,12 @@
+import app.database.mock_data as MockData
 from typing import Callable, Iterator, Optional
 from psycopg import Connection
 
 from app.models.auth import UserRegister
+from app.models.users import UserUpdate
 from app.database import get_db
-from app.database.mock_data import users
 from app.database.models import User, UserInDB
-from app.security import manager
+from app.security import manager, hash_password
 
 
 @manager.user_loader(conn_provider=get_db)
@@ -29,31 +30,37 @@ def get_user_by_username(
     if db is None:
         db = next(conn_provider())
 
-    user = next((user for user in users if user.username == username), None)
+    user = MockData.get_user_by_username(username)
     return user
 
 
-def get_users(db: Connection = None):
-    return users
+def get_users(db: Connection) -> list[User]:
+    return MockData.get_users()
 
 
-def get_user_by_id(user_id: str, db: Connection):
-    return next((user for user in users if user.id == user_id), None)
+def get_user_by_id(user_id: str, db: Connection) -> User:
+    return MockData.get_user_by_id(user_id)
 
 
 def create_user(newUser: UserRegister, db: Connection) -> User:
-    user = User(
-        id="61cb7fca-24a4-47e3-8eff-35acbbb22642",
-        username=newUser.username,
-        full_name=newUser.full_name,
-        is_admin=False,
+    password_hash = hash_password(newUser.password)
+    user = MockData.create_user(
+        UserInDB(
+            username=newUser.username,
+            full_name=newUser.full_name,
+            password_hash=password_hash,
+        )
     )
     return user
 
 
-def update_user(user_id: str, user: UserInDB, db: Connection) -> User:
-    return next((user for user in users if user.id == user_id), None)
+def update_user(user_id: str, user: UserUpdate, db: Connection) -> User:
+    if user.password is not None:
+        user.password_hash = hash_password(user.password)
+        user.password = None
+    user = MockData.update_user(user_id, user)
+    return user
 
 
 def delete_user(user_id: str, db: Connection):
-    return
+    return MockData.delete_user(user_id)
