@@ -30,7 +30,10 @@ def get_user_by_username(
     if db is None:
         db = next(conn_provider())
 
-    user = MockData.get_user_by_username(username)
+    cur = db.execute("SELECT * FROM users WHERE username = %s;", (username,))
+    result = cur.fetchone()
+    user = UserInDB.parse_obj(result)
+    print(user)
     return user
 
 
@@ -44,14 +47,25 @@ def get_user_by_id(user_id: str, db: Connection) -> User:
 
 def create_user(newUser: UserRegister, db: Connection) -> User:
     password_hash = hash_password(newUser.password)
-    user = MockData.create_user(
-        UserInDB(
-            username=newUser.username,
-            full_name=newUser.full_name,
-            password_hash=password_hash,
+    # user = MockData.create_user(
+    #     UserInDB(
+    #         username=newUser.username,
+    #         full_name=newUser.full_name,
+    #         password_hash=password_hash,
+    #     )
+    # )
+    with db.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO users (username, password_hash, full_name)
+            VALUES (%s, %s, %s)
+            RETURNING id;
+            """,
+            (newUser.username, password_hash, newUser.full_name),
         )
-    )
-    return user
+        id = str(cur.fetchone()["id"])
+        db.commit()
+        return User(id=id, username=newUser.username, full_name=newUser.full_name)
 
 
 def update_user(user_id: str, user: UserUpdate, db: Connection) -> User:
