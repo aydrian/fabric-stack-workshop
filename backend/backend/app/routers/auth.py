@@ -23,7 +23,7 @@ def login(
     """
     user = get_user_by_username(form_data.username, db)
 
-    if not user:
+    if user is None:
         raise InvalidCredentialsException
 
     if not verify_password(form_data.password, user.password_hash):
@@ -51,7 +51,7 @@ def register(
     newUser: UserRegister,
     db: Connection = Depends(get_db),
 ) -> AuthResponse:
-    if get_user_by_username(newUser.username, db):
+    if get_user_by_username(newUser.username, db) is not None:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="Username already exists"
         )
