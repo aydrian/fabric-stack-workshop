@@ -1,3 +1,4 @@
+from typing import Optional
 from uuid import uuid4, UUID
 from app.models.users import UserUpdate
 from app.database.models import UserInDB
@@ -49,18 +50,14 @@ def get_users() -> list[UserInDB]:
     return users
 
 
-def get_user_by_id(user_id: str) -> UserInDB:
+def get_user_by_id(user_id: str) -> Optional[UserInDB]:
     user_id = UUID(user_id)
     user = next((user for user in users if user.id == user_id), None)
-    if user is None:
-        raise Exception("User not found.")
     return user
 
 
-def get_user_by_username(username: str) -> UserInDB:
+def get_user_by_username(username: str) -> Optional[UserInDB]:
     user = next((user for user in users if user.username == username), None)
-    if user is None:
-        raise Exception("User not found.")
     return user
 
 
@@ -71,12 +68,13 @@ def create_user(newUser: UserInDB) -> UserInDB:
 
 
 def update_user(user_id: str, user_updates: UserUpdate) -> UserInDB:
+    user_id = UUID(user_id)
     (index, user) = next(
         ((i, item) for i, item in enumerate(users) if item.id == user_id),
         (None, None),
     )
     if index is None:
-        raise Exception(detail="User not found.")
+        raise Exception("User not found.")
     for key, value in user_updates.dict(exclude_none=True).items():
         setattr(user, key, value)
     users[index] = user
@@ -87,6 +85,6 @@ def delete_user(user_id: str):
     user_id = UUID(user_id)
     index = next((i for i, item in enumerate(users) if item.id == user_id), None)
     if index is None:
-        raise Exception(detail="User not found.")
+        raise Exception("User not found.")
     del users[index]
     return

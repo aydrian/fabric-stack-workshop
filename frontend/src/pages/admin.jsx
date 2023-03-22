@@ -15,13 +15,27 @@ export default function AdminPage() {
   });
 
   const handleDelete = async (id) => {
-    await UserService.delUser(id).catch(onUnauthorized);
-    mutate();
+    mutate(async (data) => {
+      await UserService.delUser(id).catch(onUnauthorized);
+      const users = data.users.filter((user) => user.id !== id);
+      return { ...data, users };
+    });
   };
 
   const handleToggleAdmin = async (id, is_admin) => {
-    await UserService.setAdmin(id, !is_admin).catch(onUnauthorized);
-    mutate();
+    mutate(
+      async (data) => {
+        const response = await UserService.setAdmin(id, !is_admin).catch(
+          onUnauthorized
+        );
+
+        const userIndex = data.users.findIndex((user) => user.id === id);
+        const users = [...data.users];
+        users[userIndex] = response.user;
+        return { ...data, users };
+      },
+      { revalidate: false }
+    );
   };
 
   if (error) return "An error has occurred.";
@@ -53,7 +67,7 @@ export default function AdminPage() {
                       <input
                         type="checkbox"
                         checked={user.is_admin}
-                        onClick={() =>
+                        onChange={() =>
                           handleToggleAdmin(user.id, user.is_admin)
                         }
                         title={`${user.is_admin ? "Remove" : "Make"} Admin`}
