@@ -1,6 +1,6 @@
-import app.database.mock_data as MockData
 from typing import Callable, Iterator, Optional
-from psycopg import Connection
+from psycopg import Connection, sql
+from uuid import UUID
 
 from app.models.auth import UserRegister
 from app.models.users import UserUpdate
@@ -30,43 +30,65 @@ def get_user_by_username(
     if db is None:
         db = next(conn_provider())
 
-    cur = db.execute("SELECT * FROM users WHERE username = %s;", (username,))
-    result = cur.fetchone()
+    result = db.execute(
+        "SELECT * FROM users WHERE username = %s;", (username,)
+    ).fetchone()
+    if result is None:
+        return result
     user = UserInDB.parse_obj(result)
-    print(user)
     return user
 
 
 def get_users(db: Connection) -> list[User]:
-    return MockData.get_users()
+    results = db.execute(
+        """
+        SELECT id, username, full_name, is_admin
+        FROM users;
+    """
+    ).fetchall()
+    users = [User.parse_obj(item) for item in results if item is not None]
+    return users
 
 
 def get_user_by_id(user_id: str, db: Connection) -> User:
-    return MockData.get_user_by_id(user_id)
+    result = db.execute("SELECT * FROM users WHERE id = %s;", (user_id,)).fetchone()
+    if result is None:
+        return result
+    user = User.parse_obj(result)
+    return user
 
 
 def create_user(newUser: UserRegister, db: Connection) -> User:
     password_hash = hash_password(newUser.password)
-    cur = db.execute(
+    id = db.execute(
         """
         INSERT INTO users (username, password_hash, full_name)
         VALUES (%s, %s, %s)
         RETURNING id;
         """,
         (newUser.username, password_hash, newUser.full_name),
-    )
-    id = cur.fetchone()["id"]
-    db.commit()
+    ).fetchone()["id"]
     return User(id=id, username=newUser.username, full_name=newUser.full_name)
 
 
 def update_user(user_id: str, user: UserUpdate, db: Connection) -> User:
+    user_id = UUID(user_id)
     if user.password is not None:
         user.password_hash = hash_password(user.password)
         user.password = None
-    user = MockData.update_user(user_id, user)
+    user_dict = user.dict(exclude_none=True)
+    query = sql.SQL("UPDATE users SET {data} WHERE id={id};").format(
+        data=sql.SQL(", ").join(
+            sql.Composed([sql.Identifier(k), sql.SQL(" = "), sql.Placeholder(k)])
+            for k in user_dict.keys()
+        ),
+        id=user_id,
+    )
+    db.execute(query, user_dict)
+    user = get_user_by_id(user_id, db)
     return user
 
 
 def delete_user(user_id: str, db: Connection):
-    return MockData.delete_user(user_id)
+    db.execute("DELETE FROM users WHERE id=%s", (user_id,))
+    return
