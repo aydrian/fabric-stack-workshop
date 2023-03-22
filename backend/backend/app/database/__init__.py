@@ -1,11 +1,12 @@
-import psycopg
+from psycopg_pool import ConnectionPool
 from psycopg.rows import dict_row
 from app.config import settings
 
+pool = ConnectionPool(
+    settings.DATABASE_URL, open=False, kwargs={"row_factory": dict_row}
+)
+
 
 def get_db():
-    db = psycopg.connect(settings.DATABASE_URL, row_factory=dict_row)
-    try:
-        yield db
-    finally:
-        db.close()
+    with pool.connection() as conn:
+        yield conn
