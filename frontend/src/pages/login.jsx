@@ -8,23 +8,33 @@ export default function LoginPage() {
   const location = useLocation();
   const { onLogin } = useAuth();
   const id = React.useId();
+  const [loginMessage, setLoginMessage] = React.useState("");
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const usernameId = `username-${id}`;
   const passwordId = `password-${id}`;
 
+  React.useEffect(() => {
+    if (location.state?.loginMsg) {
+      setLoginMessage(location.state.loginMsg);
+    }
+  }, [location]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await onLogin(username, password);
+    setLoginMessage("");
+    try {
+      await onLogin(username, password);
+    } catch (err) {
+      setLoginMessage(err.message || err.detail);
+    }
   };
 
   return (
     <>
       <Helmet title={SITE_NAME} />
       <h2>Login</h2>
-      {location.state?.loginMsg ? (
-        <div style={{ color: "red" }}>{location.state?.loginMsg}</div>
-      ) : null}
+      {loginMessage ? <div style={{ color: "red" }}>{loginMessage}</div> : null}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor={usernameId}>Username:</label>
