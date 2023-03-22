@@ -7,8 +7,5 @@ router = APIRouter()
 
 @router.get("/test-db-connection")
 async def test_db(db: Connection = Depends(get_db)) -> list:
-    with db.cursor() as cur:
-        cur.execute("SELECT now()")
-        res = cur.fetchall()
-        db.commit()
-        return res
+    res = db.execute("SELECT now()").fetchall()
+    return res
