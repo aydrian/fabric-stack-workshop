@@ -9,7 +9,7 @@ readme = "README.md"
 python = "^3.11"
 fastapi = "^0.94.0"
 uvicorn = { extras = ["standard"], version = "^0.21.0" }
-psycopg = { extras = ["binary"], version = "^3.1.8" }
+psycopg = {extras = ["binary", "pool"], version = "^3.1.8"}
 python-multipart = "^0.0.6"
 fastapi-login = "^1.8.3"
 
