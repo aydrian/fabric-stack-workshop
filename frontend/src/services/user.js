@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL } from "config";
 import { parseJson } from ".";
 
 export const USERS_ENDPOINT = `${API_BASE_URL}/users`;

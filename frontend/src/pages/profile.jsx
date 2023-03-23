@@ -1,13 +1,13 @@
 import React from "react";
 import useSWR from "swr";
 import { Helmet } from "react-helmet";
-import { SITE_NAME } from "../config";
+import { SITE_NAME } from "config";
 
-import { ChangePassword } from "../components/change-password";
+import { ChangePassword } from "components/change-password";
 
-import { useAuth } from "../context/auth";
-import { fetcher } from "../services";
-import { CURRENT_USER_ENDPOINT, update } from "../services/user";
+import { useAuth } from "context/auth";
+import { fetcher } from "services";
+import { CURRENT_USER_ENDPOINT, update } from "services/user";
 
 export default function ProfilePage() {
   const { onUnauthorized } = useAuth();

@@ -1,8 +1,8 @@
 import React from "react";
 import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 
-import { useSessionStorage } from "../hooks/use-session-storage";
-import * as AuthService from "../services/auth";
+import { useSessionStorage } from "hooks/use-session-storage";
+import * as AuthService from "services/auth";
 
 const AuthContext = React.createContext(null);
 

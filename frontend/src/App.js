@@ -1,14 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 
-import PrivateLayout from "./components/private-layout";
-import PublicLayout from "./components/public-layout";
+import PrivateLayout from "components/private-layout";
+import PublicLayout from "components/public-layout";
 
-import { ProtectedRoute } from "./context/auth";
+import { ProtectedRoute } from "context/auth";
 
-import AdminPage from "./pages/admin";
-import ProfilePage from "./pages/profile";
-import LoginPage from "./pages/login";
-import SignupPage from "./pages/signup";
+import AdminPage from "pages/admin";
+import ProfilePage from "pages/profile";
+import LoginPage from "pages/login";
+import SignupPage from "pages/signup";
 import "./App.css";
 
 function App() {
