@@ -1,12 +1,12 @@
 import React from "react";
 import useSWR from "swr";
 import { Helmet } from "react-helmet";
-import { SITE_NAME } from "../config";
+import { SITE_NAME } from "config";
 
-import { useAuth } from "../context/auth";
-import * as UserService from "../services/user";
-import { fetcher } from "../services";
-import { USERS_ENDPOINT } from "../services/user";
+import { useAuth } from "context/auth";
+import * as UserService from "services/user";
+import { fetcher } from "services";
+import { USERS_ENDPOINT } from "services/user";
 
 export default function AdminPage() {
   const { onUnauthorized } = useAuth();

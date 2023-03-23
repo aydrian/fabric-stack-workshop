@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { SITE_NAME } from "../config";
-import { useAuth } from "../context/auth";
+import { SITE_NAME } from "config";
+import { useAuth } from "context/auth";
 
 export default function LoginPage() {
   const location = useLocation();

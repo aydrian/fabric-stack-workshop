@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/auth";
 import { Helmet } from "react-helmet";
-import { SITE_NAME } from "../config";
+import { SITE_NAME } from "config";
+import { useAuth } from "context/auth";
 
 export default function SignupPage() {
   const { onRegister } = useAuth();
