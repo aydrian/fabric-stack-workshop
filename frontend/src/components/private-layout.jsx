@@ -3,7 +3,6 @@ import { NavLink, Outlet } from "react-router-dom";
 
 import { useAuth } from "context/auth";
 import { Button } from "components/button";
-import { Card } from "components/card";
 
 import "./private-layout.css";
 
@@ -29,7 +28,7 @@ export default function PrivateLayout() {
             style={{
               "--time": "20s",
               "--amount": "5",
-              "--fill": "rgba(195, 203, 247, 0.6)",
+              "--fill": "rgba(195, 203, 247, 0.6)"
             }}
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440.7 428.7">
