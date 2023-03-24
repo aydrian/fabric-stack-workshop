@@ -72,11 +72,11 @@
 In your Cockroach Cloud Console:
 
 1. Click the Connect button in the top right corner.
-1. Change "Select option/language" to `CockroachDB Client`
+1. Change "Select option/language" to "CockroachCloud CLI." Open the "Download the latest CCloud CLI" section.
 1. Follow the instructions for your operating system.
-1. Open a CockroachDB SQL Shell by running the following command in your terminal with the connection string from the Connect modal:
+1. Open a CockroachDB SQL Shell by running the following command in your terminal:
    ```shell
-   cockroach sql --url "YOUR DATABASE URL"
+   ccloud cluster sql
    ```
 
 ## Test your connection

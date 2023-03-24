@@ -18,8 +18,15 @@ erDiagram
 
 ```SQL
 IMPORT INTO users (username, full_name, password_hash)
-
+  CSV DATA (
+      'https://raw.githubusercontent.com/aydrian/fabric-stack/main/workshop/assets/mock_data.csv'
+  )
+  WITH
+    skip='1';
 ```
+
+> **Note**
+> You can import from a local file using [Userfile Storage](https://www.cockroachlabs.com/docs/v22.2/use-userfile-storage)
 
 | [Back](part-3.md) | [Next](part-5.md) |
 | ----------------- | ----------------- |
