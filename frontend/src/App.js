@@ -9,7 +9,9 @@ import AdminPage from "pages/admin";
 import ProfilePage from "pages/profile";
 import LoginPage from "pages/login";
 import SignupPage from "pages/signup";
-import "./App.css";
+
+import "./App.scss";
+import "./blobz.scss";
 
 function App() {
   return (

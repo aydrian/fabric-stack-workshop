@@ -1,0 +1,29 @@
+.private-header {
+  width: 100vw;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.private-content {
+  height: calc(100vh - 8rem); /* 4rem header + 4rem footer */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.route-links {
+  display: flex;
+  gap: 1rem;;
+  margin-left: 2rem;
+}
+
+.private-nav-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-right: 2rem;
+}

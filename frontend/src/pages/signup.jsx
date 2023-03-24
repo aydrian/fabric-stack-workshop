@@ -4,6 +4,10 @@ import { Helmet } from "react-helmet";
 import { SITE_NAME } from "config";
 import { useAuth } from "context/auth";
 
+import { Card } from "components/card";
+import { Input } from "components/input";
+import { Button } from "components/button";
+
 export default function SignupPage() {
   const { onRegister } = useAuth();
   const id = React.useId();
@@ -35,53 +39,55 @@ export default function SignupPage() {
     <>
       <Helmet title={`${SITE_NAME}: Sign up`} />
       <h2>Sign up</h2>
-      <form onSubmit={handleSubmit}>
-        {formMessage.length > 0 ? <div>{formMessage}</div> : null}
-        <div>
-          <label htmlFor={fullnameId}>Full name: </label>
-          <input
-            type="text"
-            id={fullnameId}
-            value={fullname}
-            onChange={(e) => setFullname(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor={usernameId}>Username:</label>
-          <input
-            type="text"
-            id={usernameId}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor={passwordId}>Password:</label>
-          <input
-            type="password"
-            id={passwordId}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor={confirmPassword}>Confirm Password:</label>
-          <input
-            type="password"
-            id={confirmPasswordId}
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Sign up</button>
-        <div>
-          Already have an account? <Link to="/">Log in</Link>
-        </div>
-      </form>
+      <Card>
+        <form onSubmit={handleSubmit}>
+          {formMessage.length > 0 ? <div>{formMessage}</div> : null}
+          <div className="input-block">
+            <label htmlFor={fullnameId}>Full name: </label>
+            <Input
+              type="text"
+              id={fullnameId}
+              value={fullname}
+              onChange={(e) => setFullname(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-block">
+            <label htmlFor={usernameId}>Username:</label>
+            <Input
+              type="text"
+              id={usernameId}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-block">
+            <label htmlFor={passwordId}>Password:</label>
+            <Input
+              type="password"
+              id={passwordId}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-block">
+            <label htmlFor={confirmPassword}>Confirm Password:</label>
+            <Input
+              type="password"
+              id={confirmPasswordId}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </div>
+          <Button type="submit">Sign up</Button>
+          <div>
+            Already have an account? <Link to="/">Log in</Link>
+          </div>
+        </form>
+      </Card>
     </>
   );
 }
