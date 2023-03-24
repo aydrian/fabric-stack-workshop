@@ -4,7 +4,7 @@
 
 ### Prerequisites
 
-- [Python 3.9+](https://wiki.python.org/moin/BeginnersGuide/Download)
+- [Python 3.11+](https://wiki.python.org/moin/BeginnersGuide/Download)
 - [Poetry](https://python-poetry.org/docs/#installation)
 - [Nodejs 14+](https://nodejs.org/en/download)
 - [GitHub](https://docs.github.com/en/get-started/quickstart)
@@ -89,7 +89,7 @@ In your Cockroach Cloud Console:
 1. Start the server
 
    ```shell
-   python backend/main.py
+   poetry run python backend/main.py
    ```
 
 1. Open a new browser window and navigate to http://localhost:8000/test-db-connection
