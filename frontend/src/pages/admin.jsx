@@ -3,6 +3,8 @@ import useSWR from "swr";
 import { Helmet } from "react-helmet";
 import { SITE_NAME } from "config";
 
+import { Card } from "components/card";
+import { Button } from "components/button";
 import { useAuth } from "context/auth";
 import * as UserService from "services/user";
 import { fetcher } from "services";
@@ -11,7 +13,7 @@ import { USERS_ENDPOINT } from "services/user";
 export default function AdminPage() {
   const { onUnauthorized } = useAuth();
   const { data, error, isLoading, mutate } = useSWR(USERS_ENDPOINT, fetcher, {
-    onError: onUnauthorized
+    onError: onUnauthorized,
   });
 
   const handleDelete = async (id) => {
@@ -46,7 +48,7 @@ export default function AdminPage() {
       <Helmet title={`${SITE_NAME}: Admin`} />
       <h2>Admin</h2>
       {data?.users ? (
-        <section>
+        <Card className="card--blue">
           <h3>Users</h3>
           <table>
             <thead>
@@ -63,7 +65,7 @@ export default function AdminPage() {
                   <tr key={user.id}>
                     <td>{user.username}</td>
                     <td>{user.full_name}</td>
-                    <td>
+                    <td className="cell-center">
                       <input
                         type="checkbox"
                         checked={user.is_admin}
@@ -74,19 +76,20 @@ export default function AdminPage() {
                       />
                     </td>
                     <td>
-                      <button
+                      <Button
+                        className="button--red"
                         type="button"
                         onClick={() => handleDelete(user.id)}
                       >
                         Delete
-                      </button>
+                      </Button>
                     </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
-        </section>
+        </Card>
       ) : null}
     </>
   );
