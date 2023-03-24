@@ -4,15 +4,17 @@ import { Helmet } from "react-helmet";
 import { SITE_NAME } from "config";
 
 import { ChangePassword } from "components/change-password";
-
+import { Card } from "components/card";
 import { useAuth } from "context/auth";
 import { fetcher } from "services";
 import { CURRENT_USER_ENDPOINT, update } from "services/user";
 
+import "./profile.scss";
+
 export default function ProfilePage() {
   const { onUnauthorized } = useAuth();
   const { data, error, isLoading } = useSWR(CURRENT_USER_ENDPOINT, fetcher, {
-    onError: onUnauthorized
+    onError: onUnauthorized,
   });
 
   const handleChangePassword = async (newPassword) => {
@@ -29,15 +31,16 @@ export default function ProfilePage() {
     <>
       <Helmet title={`${SITE_NAME}: My Profile`} />
       <h2>Profile</h2>
-      <section>
+      <Card className="profile-card card--blue">
         <img
           src="https://picsum.photos/200"
           alt={`${data.user.username} avatar`}
+          className="profile-avatar"
         />
         <h3>{data.user.username}</h3>
         <h4>{data.user.full_name}</h4>
-      </section>
-      <section>
+      </Card>
+      <section className="change-password-section">
         <h3>Change Password</h3>
         <ChangePassword handleChangePassword={handleChangePassword} />
       </section>

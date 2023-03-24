@@ -1,5 +1,8 @@
 import React from "react";
 
+import { Button } from "components/button";
+import { Input } from "components/input";
+
 export function ChangePassword({ handleChangePassword }) {
   const id = React.useId();
   const [newPassword, setNewPassword] = React.useState("");
@@ -32,9 +35,9 @@ export function ChangePassword({ handleChangePassword }) {
         <div style={{ color: "green" }}>{formMessage}</div>
       ) : null}
       {error.length > 0 ? <div style={{ color: "red" }}>{error}</div> : null}
-      <div>
+      <div className="input-block">
         <label htmlFor={newPasswordId}>New Password:</label>
-        <input
+        <Input
           type="password"
           id={newPasswordId}
           value={newPassword}
@@ -42,9 +45,9 @@ export function ChangePassword({ handleChangePassword }) {
           required
         />
       </div>
-      <div>
+      <div className="input-block">
         <label htmlFor={confirmPassword}>Confirm Password:</label>
-        <input
+        <Input
           type="password"
           id={confirmPasswordId}
           value={confirmPassword}
@@ -52,7 +55,7 @@ export function ChangePassword({ handleChangePassword }) {
           required
         />
       </div>
-      <button type="submit">Change Password</button>
+      <Button type="submit">Change Password</Button>
     </form>
   );
 }

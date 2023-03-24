@@ -1,8 +1,13 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
+
+// Try to separate imports from libraries and imports from your own code.
 import { SITE_NAME } from "config";
 import { useAuth } from "context/auth";
+import { Card } from "components/card";
+import { Input } from "components/input";
+import { Button } from "components/button";
 
 export default function LoginPage() {
   const location = useLocation();
@@ -34,33 +39,35 @@ export default function LoginPage() {
     <>
       <Helmet title={SITE_NAME} />
       <h2>Login</h2>
-      {loginMessage ? <div style={{ color: "red" }}>{loginMessage}</div> : null}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor={usernameId}>Username:</label>
-          <input
-            type="text"
-            id={usernameId}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor={passwordId}>Password:</label>
-          <input
-            type="password"
-            id={passwordId}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
-        <div>
-          Don't have an account? <Link to="/signup">Sign up</Link>
-        </div>
-      </form>
+      <Card>
+        <form onSubmit={handleSubmit}>
+          <div className="input-block">
+            <label htmlFor={usernameId}>Username:</label>
+            <Input
+              type="text"
+              id={usernameId}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-block">
+            <label htmlFor={passwordId}>Password:</label>
+            <Input
+              type="password"
+              id={passwordId}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <Button type="submit">Login</Button>
+          <div>
+            Don't have an account? <Link to="/signup">Sign up</Link>
+          </div>
+        </form>
+      </Card>
+      {loginMessage ? <div style={{ color: "red", marginTop: "1rem" }}>{loginMessage}</div> : null}
     </>
   );
 }
