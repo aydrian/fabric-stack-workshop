@@ -2,9 +2,21 @@
 
 ## Objectives
 
-- Learn SQL: Use the `CREATE` statement to build your database schema
+- Learn SQL: Use the `CREATE TABLE` statement to build your database schema
 - Understand how to store passwords in a database
 - Import data from a CSV file
+
+### `CREATE TABLE`
+
+To create a table, use `CREATE TABLE` followed by a table name, the column names, and the data type and constraint, if any, for each column.
+
+```SQL
+CREATE TABLE {table_name} (
+  {col_name} {col_type} {constraints},
+);
+```
+
+Contraints could include: `NOT NULL`, `DEFAULT {value}`, `PRIMARY KEY`, and `UNIQUE` to name a few.
 
 ### Excerise: Create a `users` table
 

@@ -4,7 +4,7 @@
 
 - Learn SQL:
 
-  - Use the `ALTER` statement to add a new column to the users table
+  - Use the `ALTER TABLE` statement to add a new column to the users table
   - Use the `SELECT` statement to list all users with a limited set of columns
 
 ### Exercise: Add `is_admin` column to `users` table
