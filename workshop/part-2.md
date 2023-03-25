@@ -64,9 +64,6 @@
    ACCESS_TOKEN_EXPIRE_MINUTES=360
    ```
 
-1. In the CockroachDB serverless tab, change `option/language` to “General connection string”. Open the `Download CA Cert` sectoin.
-1. Run the provided command for your operating system to download the CA cert.
-
 ## Cockroach CLI
 
 In your Cockroach Cloud Console:
@@ -86,10 +83,6 @@ In your Cockroach Cloud Console:
 ## Test your connection
 
 1. Open a second terminal window and navigage to fabric-stack/backend
-1. Use Poetry to activate your python environment
-   ```shell
-   poetry shell
-   ```
 1. Start the server
 
    ```shell
