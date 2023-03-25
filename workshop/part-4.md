@@ -18,6 +18,12 @@ CREATE TABLE {table_name} (
 
 Contraints could include: `NOT NULL`, `DEFAULT {value}`, `PRIMARY KEY`, and `UNIQUE` to name a few.
 
+### Storing Passwords
+
+You'll notice that we will be storing a `password_hash` instead of the actual password in the database. Storing passwords in plain text is a bad practice. In the event of a data breach, all your users would be compromised. Instead we will store the result of a hashing function that uses a secret key. Then we can verify the result of future password hashes against the one in the database.
+
+`security.py` provides functions to `hash_password` and verify_password` to assist you. This has been done for you for the Python functions in the following exercises as needed.
+
 ### Excerise: Create a `users` table
 
 Using the CockroachDB SQL Shell (`ccloud cluster sql`), crate a new table that matches the Entity Relationaship diagram below. All fields should be required.
