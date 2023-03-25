@@ -6,6 +6,10 @@
   - Use the `SELECT` statement to aid in login
   - Use the `INSERT` statement to sign up new users
 
+### `SELECT`
+
+### `INSERT`
+
 > **Note**
 > The following exercises involve updating functions in `fabric-stack/backend/backend/app/database/actions.py`. You should not need to modify any other files.
 

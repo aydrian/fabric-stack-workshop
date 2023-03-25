@@ -129,7 +129,7 @@ You can also filter with parameters:
 cursor.execute("SELECT * FROM courses WHERE credits > %s", (0,))
 ```
 
-> **Note:**
+> **Note**
 > You are passing two arguments to `cursor.execute`. The first one is the SQL string and the 2nd is a tuple with parameters. Remember, if you have a single value in your tuple, add a **trailing comma**.
 
 For more info about inserting parameters, see [Passing parameters to SQL queries](https://www.psycopg.org/psycopg3/docs/basic/params.html)
