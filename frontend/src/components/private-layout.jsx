@@ -24,7 +24,7 @@ export default function PrivateLayout() {
         </div>
         <div className="private-nav-content">
           <div
-            class="tk-blob"
+            className="tk-blob"
             style={{
               "--time": "20s",
               "--amount": "5",

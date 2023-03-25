@@ -53,7 +53,7 @@ async def update_user(
     active_user=Depends(manager),
     db: Connection = Depends(get_db),
 ) -> UserResponse:
-    if not active_user.is_admin and active_user.id != user_id:
+    if not (active_user.is_admin or active_user.id == user_id):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
     upd_user = DBActions.update_user(user_id, user, db)
     return UserResponse(ok=True, user=upd_user)

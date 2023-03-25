@@ -11,11 +11,11 @@ export default function PublicLayout() {
       </header>
       <main className="public-content">
         <div
-          class="tk-blob"
+          className="tk-blob"
           style={{
             "--time": "20s",
             "--amount": "5",
-            "--fill": "#dbbff988",
+            "--fill": "#dbbff988"
           }}
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440.7 428.7">
