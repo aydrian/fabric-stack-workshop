@@ -140,14 +140,14 @@ In order to run the app, we'll need to start the backend and frontend applicatio
 
 ### Backend
 
-1. In one terminal session, navigate to `fabric-stack/backend`
+1. In one terminal session, navigate to `fabric-stack-workshop/backend`
 1. To start the server, run the following:
    ```shell
    poetry run python backend/main.py
    ```
 1. You should see the following:
    ```shell
-    INFO:     Will watch for changes in these directories: ['/{Your Path}/fabric-stack/backend']
+    INFO:     Will watch for changes in these directories: ['/{Your Path}/fabric-stack-workshop/backend']
     INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
     INFO:     Started reloader process [21306] using WatchFiles
     INFO:     Started server process [21310]
@@ -157,7 +157,7 @@ In order to run the app, we'll need to start the backend and frontend applicatio
 
 ### Frontend
 
-1. In another terminal session, navigate to `fabric-stack/frontend`
+1. In another terminal session, navigate to `fabric-stack-workshop/frontend`
 1. To start the development server, run the following:
    ```shell
    npm start

@@ -10,7 +10,7 @@ You now have a working full stack application that persists users to a database.
 
 ### A quick note about CORS
 
-This application works by having a frontend on one origin (localhost:3000) make requests to a server on another domain (localhost:8000). For this to work, we have to set up [CORS](https://developer.mozilla.org/en-US/docs/Glossary/CORS) support on the server. If you look at `fabric-stack/backend/backend/main.py` you notice a list of `origins`.
+This application works by having a frontend on one origin (localhost:3000) make requests to a server on another domain (localhost:8000). For this to work, we have to set up [CORS](https://developer.mozilla.org/en-US/docs/Glossary/CORS) support on the server. If you look at `fabric-stack-workshop/backend/backend/main.py` you notice a list of `origins`.
 
 ```python
 origins = ["http://localhost:3000", "localhost:3000"]
