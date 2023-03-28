@@ -60,7 +60,7 @@ Now that we have a `users` tables, let's fill it by importing some mock data fro
 ```SQL
 IMPORT INTO users (username, full_name, password_hash)
   CSV DATA (
-      'https://raw.githubusercontent.com/aydrian/fabric-stack/main/workshop/assets/mock_data.csv'
+      'https://raw.githubusercontent.com/aydrian/fabric-stack-workshop/main/workshop/assets/mock_data.csv'
   )
   WITH
     skip='1';

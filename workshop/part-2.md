@@ -12,11 +12,11 @@
 1. Open your terminal
 1. Clone the repo by executing the following command
    ```shell
-   git clone git@github.com:aydrian/fabric-stack.git
+   git clone git@github.com:aydrian/fabric-stack-workshop.git
    ```
-1. Change directory into `fabric-stack`
+1. Change directory into `fabric-stack-workshop`
    ```shell
-   cd fabric-stack
+   cd fabric-stack-workshop
    ```
 1. There will be 2 folders of interest, `backend` and `frontend`.
 1. Change directory into `backend`
@@ -82,7 +82,7 @@ In your Cockroach Cloud Console:
 
 ## Test your connection
 
-1. Open a second terminal window and navigage to fabric-stack/backend
+1. Open a second terminal window and navigage to fabric-stack-workshop/backend
 1. Start the server
 
    ```shell

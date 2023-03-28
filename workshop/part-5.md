@@ -11,7 +11,7 @@
 ### `INSERT`
 
 > **Note**
-> The following exercises involve updating functions in `fabric-stack/backend/backend/app/database/actions.py`. You should not need to modify any other files.
+> The following exercises involve updating functions in `fabric-stack-workshop/backend/backend/app/database/actions.py`. You should not need to modify any other files.
 
 > **Note**
 > Each function provides you with a db argument which is a PsycoPG [Connection class](https://www.psycopg.org/psycopg3/docs/api/connections.html) which can be used to execute sql statements.
