@@ -11,10 +11,6 @@ import { Button } from "components/button";
 export default function SignupPage() {
   const { onRegister } = useAuth();
   const id = React.useId();
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
-  const [fullname, setFullname] = React.useState("");
   const [formMessage, setFormMessage] = React.useState("");
   const usernameId = `username-${id}`;
   const passwordId = `password-${id}`;
@@ -23,6 +19,10 @@ export default function SignupPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const { username, password, fullname, confirmPassword } =
+      Object.fromEntries(formData.entries());
     setFormMessage("");
     if (password !== confirmPassword) {
       return setFormMessage("Passwords must match");
@@ -44,41 +44,22 @@ export default function SignupPage() {
           {formMessage.length > 0 ? <div>{formMessage}</div> : null}
           <div className="input-block">
             <label htmlFor={fullnameId}>Full name: </label>
-            <Input
-              type="text"
-              id={fullnameId}
-              value={fullname}
-              onChange={(e) => setFullname(e.target.value)}
-              required
-            />
+            <Input type="text" id={fullnameId} name="fullname" required />
           </div>
           <div className="input-block">
             <label htmlFor={usernameId}>Username:</label>
-            <Input
-              type="text"
-              id={usernameId}
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
+            <Input type="text" id={usernameId} name="username" required />
           </div>
           <div className="input-block">
             <label htmlFor={passwordId}>Password:</label>
-            <Input
-              type="password"
-              id={passwordId}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <Input type="password" id={passwordId} name="password" required />
           </div>
           <div className="input-block">
-            <label htmlFor={confirmPassword}>Confirm Password:</label>
+            <label htmlFor={confirmPasswordId}>Confirm Password:</label>
             <Input
               type="password"
               id={confirmPasswordId}
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              name="confirmPassword"
               required
             />
           </div>

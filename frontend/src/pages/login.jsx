@@ -14,8 +14,6 @@ export default function LoginPage() {
   const { onLogin } = useAuth();
   const id = React.useId();
   const [loginMessage, setLoginMessage] = React.useState("");
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
   const usernameId = `username-${id}`;
   const passwordId = `password-${id}`;
 
@@ -27,6 +25,9 @@ export default function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const { username, password } = Object.fromEntries(formData.entries());
     setLoginMessage("");
     try {
       await onLogin(username, password);
@@ -43,23 +44,11 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit}>
           <div className="input-block">
             <label htmlFor={usernameId}>Username:</label>
-            <Input
-              type="text"
-              id={usernameId}
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
+            <Input type="text" id={usernameId} name="username" required />
           </div>
           <div className="input-block">
             <label htmlFor={passwordId}>Password:</label>
-            <Input
-              type="password"
-              id={passwordId}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <Input type="password" id={passwordId} name="password" required />
           </div>
           <Button type="submit">Login</Button>
           <div>
@@ -67,7 +56,9 @@ export default function LoginPage() {
           </div>
         </form>
       </Card>
-      {loginMessage ? <div style={{ color: "red", marginTop: "1rem" }}>{loginMessage}</div> : null}
+      {loginMessage ? (
+        <div style={{ color: "red", marginTop: "1rem" }}>{loginMessage}</div>
+      ) : null}
     </>
   );
 }

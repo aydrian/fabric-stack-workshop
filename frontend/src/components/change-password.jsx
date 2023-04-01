@@ -5,8 +5,6 @@ import { Input } from "components/input";
 
 export function ChangePassword({ handleChangePassword }) {
   const id = React.useId();
-  const [newPassword, setNewPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
   const [formMessage, setFormMessage] = React.useState("");
   const [error, setError] = React.useState("");
   const newPasswordId = `newPassword-${id}`;
@@ -14,6 +12,11 @@ export function ChangePassword({ handleChangePassword }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const { newPassword, confirmPassword } = Object.fromEntries(
+      formData.entries()
+    );
     setFormMessage("");
     setError("");
     if (newPassword !== confirmPassword) {
@@ -21,9 +24,8 @@ export function ChangePassword({ handleChangePassword }) {
     }
     try {
       await handleChangePassword(newPassword);
-      setNewPassword("");
-      setConfirmPassword("");
       setFormMessage("Password successfully changed.");
+      form.reset();
     } catch (err) {
       setError(err.message);
     }
@@ -37,21 +39,14 @@ export function ChangePassword({ handleChangePassword }) {
       {error.length > 0 ? <div style={{ color: "red" }}>{error}</div> : null}
       <div className="input-block">
         <label htmlFor={newPasswordId}>New Password:</label>
-        <Input
-          type="password"
-          id={newPasswordId}
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          required
-        />
+        <Input type="password" id={newPasswordId} name="newPassword" required />
       </div>
       <div className="input-block">
-        <label htmlFor={confirmPassword}>Confirm Password:</label>
+        <label htmlFor={confirmPasswordId}>Confirm Password:</label>
         <Input
           type="password"
           id={confirmPasswordId}
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          name="confirmPassword"
           required
         />
       </div>
