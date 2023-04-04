@@ -1,0 +1,23 @@
+.button {
+  height: 2rem;
+  border-radius: 6px;
+  width: fit-content;
+  padding: 0 2rem;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: rgb(219, 219, 219);
+  }
+
+  &:focus {
+    outline: lightblue 1px;
+  }
+
+  &--red {
+    background-color: rgb(224, 46, 46);
+    color: white;
+  }
+}

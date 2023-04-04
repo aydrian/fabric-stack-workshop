@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = ""
+authors = ["Aydrian Howard <aydrian@cockroachlabs.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.94.0"
+uvicorn = { extras = ["standard"], version = "^0.21.0" }
+psycopg = {extras = ["binary", "pool"], version = "^3.1.8"}
+python-multipart = "^0.0.6"
+fastapi-login = "^1.8.3"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

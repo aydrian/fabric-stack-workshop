@@ -1,0 +1,23 @@
+.card {
+  background: linear-gradient(225deg, rgb(76 5 218 / 87%) 0%, rgb(10 0 53) 90%);
+  border-radius: 12px;
+  /* https://getcssscan.com/css-box-shadow-examples */
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  color: white;
+
+  &--blue {
+    background: linear-gradient(225deg, rgba(22, 58, 218, 0.87) 0%, rgb(17, 20, 146) 90%);
+  }
+
+  .input {
+    border: 0px;
+  }
+}
+
+.card a {
+  color: white;
+  text-decoration: line;
+}
