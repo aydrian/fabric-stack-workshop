@@ -1,8 +1,8 @@
 import { API_BASE_URL } from "config";
 import { parseJson } from ".";
 
-export const USERS_ENDPOINT = `${API_BASE_URL}/users`;
-export const CURRENT_USER_ENDPOINT = `${USERS_ENDPOINT}/me`;
+export const USERS_ENDPOINT = `${API_BASE_URL}/users/`;
+export const CURRENT_USER_ENDPOINT = `${USERS_ENDPOINT}me`;
 
 export const update = (id, fields) => {
   return fetch(`${USERS_ENDPOINT}/${id}`, {

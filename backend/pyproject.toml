@@ -6,7 +6,7 @@ authors = ["Aydrian Howard <aydrian@cockroachlabs.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 fastapi = "^0.94.0"
 uvicorn = { extras = ["standard"], version = "^0.21.0" }
 psycopg = {extras = ["binary", "pool"], version = "^3.1.8"}
