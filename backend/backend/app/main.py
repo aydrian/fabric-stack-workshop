@@ -5,7 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from app.database import pool
-from app.routers import auth, users, test_db_connection
+from app.routers import auth, users
 
 BUILD_DIR = Path("../frontend/build")
 
@@ -23,7 +23,6 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(users.router)
-app.include_router(test_db_connection.router)
 
 app.mount("/static/", StaticFiles(directory=BUILD_DIR/ "static"), name="React App static files")
 templates = Jinja2Templates(directory=BUILD_DIR.as_posix())
