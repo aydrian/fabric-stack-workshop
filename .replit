@@ -1,4 +1,8 @@
 run = "sh start.sh"
 
+language = "python3"
+entrypoint = "README.md"
+hidden = [".git", "**/__pycache__", "**/.mypy_cache", "**/*.pyc"]
+
 [nix]
 channel = "stable-22_11"
