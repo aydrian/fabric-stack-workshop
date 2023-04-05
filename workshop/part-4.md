@@ -1,4 +1,4 @@
-# Part 4: Prepare the database
+# Part 4: Prepare the Database
 
 ## 💡 Objectives
 
@@ -18,9 +18,9 @@ CREATE TABLE {table_name} (
 
 Contraints could include: `NOT NULL`, `DEFAULT {value}`, `PRIMARY KEY`, and `UNIQUE` to name a few.
 
-## 🗝️ Storing Passwords
+## 🗝️ Storing passwords
 
-You'll notice that we will be storing a `password_hash` instead of the actual password in the database. Storing passwords in plain text is a bad practice. In the event of a data breach, all your users would be compromised. Instead we will store the result of a hashing function that uses a secret key, stored as the `SECRET_KEY` secret. Then we can verify the result of future password hashes against the one in the database.
+You'll notice that we'll be storing a `password_hash` instead of the actual password in the database. Storing passwords in plain text is a bad practice. In the event of a data breach, all your users would be compromised. Instead, we'll store the result of a hashing function that uses a secret key, stored as the `SECRET_KEY` secret. Then we can verify the result of future password hashes against the one in the database.
 
 `security.py` provides functions to `hash_password` and verify_password` to assist you. This has been done for you for the Python functions in the following exercises as needed.
 
@@ -55,7 +55,7 @@ CREATE TABLE users (
 
 </details>
 
-### 📝 Import Mock Data from a CSV file
+### 📝 Import mock data from a CSV file
 
 Now that we have a `users` tables, let's fill it by importing some mock data from a CSV file. Use the Cockroach SQL Shell from the previous exercise.
 
@@ -71,7 +71,7 @@ IMPORT INTO users (username, full_name, password_hash)
 > **Note**
 > You can import from a local file using [Userfile Storage](https://www.cockroachlabs.com/docs/v22.2/use-userfile-storage)
 
-Once that is complete, query all the data from the `users` table.
+Once that's complete, query all the data from the `users` table.
 
 ```SQL
 SELECT * FROM users;
