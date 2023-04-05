@@ -4,14 +4,14 @@
 
 - Quick intro to SQL
 - Quick intro to PsycoPG 3
-- Starting the backend and frontend applications
+- Starting the application
 - Experience the application features using mocked data
 
-For this workshop, we will use a starter FAbRiC stack application to teach you a core set of SQL statements and how to use them with PsycoPG 3, a PostgreSQL adapter for Python. The application allows a user to register, login, perform some basic and admin functions. It consists of a FastAPI Python backend and a React frontend. Mock data has been provided to allow the application to be functional from the start. Over the course of this workshop, we'll swap out the mocked functions with calls to the database. But first, let us start with a couple short introductions.
+For this workshop, we'll use a starter FAbRiC stack application to teach you a core set of SQL statements and how to use them with PsycoPG 3, a PostgreSQL adapter for Python. The application allows a user to register, log in, and perform some basic and admin functions. It consists of a FastAPI Python back end and a React front end. Mock data has been provided to allow the application to be functional from the start. Over the course of this workshop, we'll swap out the mocked functions with calls to the database. But first, let's start with a couple short introductions.
 
 ## 🔍 Intro to SQL
 
-As we complete each excercise we'll learn how to use each of the following SQL statements.
+As we complete each excercise, we'll learn how to use each of the following SQL statements:
 
 - CREATE TABLE
 - INSERT INTO
@@ -20,13 +20,13 @@ As we complete each excercise we'll learn how to use each of the following SQL s
 - ALTER TABLE
 - DELETE FROM
 
-There is a full [Learn CockroachDB SQL](https://www.cockroachlabs.com/docs/cockroachcloud/learn-cockroachdb-sql.html) tutorial located in the docs. [More in depth documentation](https://www.cockroachlabs.com/docs/stable/sql-statements.html) is available and can be used as reference.
+There is a full [Learn CockroachDB SQL](https://www.cockroachlabs.com/docs/cockroachcloud/learn-cockroachdb-sql.html) tutorial located in the docs. [More in-depth documentation](https://www.cockroachlabs.com/docs/stable/sql-statements.html) is available and can be used as reference.
 
 ## 🐍 Intro to PsycoPG 3
 
-[PsycoPG 3](https://www.psycopg.org/psycopg3/) is a Python library used to connect to a Postgres compatible database (i.e. CockroachDB).
+[PsycoPG 3](https://www.psycopg.org/psycopg3/) is a Python library used to connect to a Postgres-compatible database (e.g., CockroachDB).
 
-Here is some boilerplate code for setting up PsycoPG.
+Here is some boilerplate code for setting up PsycoPG:
 
 ```python
 import os
@@ -74,16 +74,16 @@ with psycopg.connect(pg_conn_string) as conn:
 
 **Transaction:** A series of SQL statements that you want to happen atomically.
 
-There are two main ways to interact with the database.
+There are two main ways to interact with the database:
 
-**Querying Data**
+**Querying data**
 
 ```python
 results = cursor.execute("SELECT * FROM programs").fetchall()
 # print(results)
 ```
 
-**Executing Statements**
+**Executing statements**
 
 ```python
 cursor.execute("INSERT INTO programs VALUES (1, 'ece')")
@@ -94,11 +94,11 @@ You must `commit()` statements for them to be saved in the database.
 
 **Transactions**
 
-How it works is that every time you use `cursor.execute`, you aren’t actually executing something against the database and you aren’t changing the data. You can imagine that you are queueing or buffering the statements.
+How it works is that every time you use `cursor.execute`, you aren’t actually executing something against the database and you aren’t changing the data. You can imagine that you're queueing or buffering the statements.
 
-When you `commit()` all the queued up statements are executed on your data in order as one atomic unit. If there was any error with any of the statements, then **NONE** of the statements will have actually touched/affected your data in the database. If there were no errors (ie. success), then all of the statements will have ran against your real data in the database.
+When you `commit()`, all the queued-up statements are executed on your data in order as one atomic unit. If there was any error with any of the statements, then **NONE** of the statements will have actually touched/affected your data in the database. If there were no errors (i.e., success), then all of the statements will have ran against your real data in the database.
 
-**Inserting Parameters**
+**Inserting parameters**
 
 You can pass data in Python variables safely into SQL using Psycopg parameters. Take a look at the example below.
 
@@ -130,15 +130,15 @@ cursor.execute("SELECT * FROM courses WHERE credits > %s", (0,))
 ```
 
 > **Note**
-> You are passing two arguments to `cursor.execute`. The first one is the SQL string and the 2nd is a tuple with parameters. Remember, if you have a single value in your tuple, add a **trailing comma**.
+> You're passing two arguments to `cursor.execute`. The first one is the SQL string and the second is a tuple with parameters. Remember, if you have a single value in your tuple, add a **trailing comma**.
 
-For more info about inserting parameters, see [Passing parameters to SQL queries](https://www.psycopg.org/psycopg3/docs/basic/params.html)
+For more info about inserting parameters, see [Passing parameters to SQL queries](https://www.psycopg.org/psycopg3/docs/basic/params.html).
 
-## ▶️ Run the App
+## ▶️ Run the app
 
-Now that we have everything set up and our Repl configured. You can start the app by clicking the ▶ Run button at the top of your Repl.
+Now that we have everything set up and our Repl configured, you can start the app by clicking the ▶ Run button at the top of your Repl.
 
-The could take some time for the first run and after your Repl sleeps. It will check for the `DATABASE_URL` secret and CA Cert, install all the packages, and generate generate the frontend build folder (if needed). Please be patient. You can watch the progress in the Console.
+The could take some time for the first run and after your Repl sleeps. It will check for the `DATABASE_URL` secret and CA Cert, install all the packages, and generate generate the front-end build folder (if needed). Please be patient. You can watch the progress in the Console.
 
 The application is ready when see the following in the Console:
 
@@ -151,7 +151,7 @@ The application is ready when see the following in the Console:
  INFO:     Application startup complete.
 ```
 
-A Webview tab will open and load the site. You can also grab the url from the Webview and open it in a new browser window or share it.
+A Webview tab will open and load the site. You can also grab the URL from the Webview and open it in a new browser window or share it.
 
 Take some time to explore the application. You can sign up for a new account or use one of the provided mock users. Every user has the same password: `password1234`. Use the `craig` username to see the admin functionality. Other users include:
 
