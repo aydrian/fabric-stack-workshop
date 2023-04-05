@@ -10,7 +10,8 @@ You now have a working full stack application that persists users to a database.
 
 ### A quick note about CORS
 
-This application works by having a frontend on one origin (localhost:3000) make requests to a server on another domain (localhost:8000). For this to work, we have to set up [CORS](https://developer.mozilla.org/en-US/docs/Glossary/CORS) support on the server. If you look at `fabric-stack-workshop/backend/backend/main.py` you notice a list of `origins`.
+This Repl is configured to have FastAPI serve the built React Application files. You may choose to deploy the frontend and backend code separately. For example, you could deploy the frontend as a static site to [Netlify](https://www.netlify.com/with/react/) or [Vercel](https://vercel.com/guides/deploying-react-with-vercel) and keep the backend on Replit or deploy to [Render](https://render.com/docs/web-services).
+For this to work, we have to set up [CORS](https://developer.mozilla.org/en-US/docs/Glossary/CORS) support on the server. If you look at `fabric-stack-workshop/backend/backend/main.py` you notice a list of `origins`.
 
 ```python
 origins = ["http://localhost:3000", "localhost:3000"]

@@ -1,12 +1,12 @@
 # Part 4: Prepare the database
 
-## Objectives
+## 💡 Objectives
 
 - Learn SQL: Use the `CREATE TABLE` statement to build your database schema
 - Understand how to store passwords in a database
 - Import data from a CSV file
 
-### `CREATE TABLE`
+## ℹ️ `CREATE TABLE`
 
 To create a table, use `CREATE TABLE` followed by a table name, the column names, and the data type and constraint, if any, for each column.
 
@@ -18,15 +18,17 @@ CREATE TABLE {table_name} (
 
 Contraints could include: `NOT NULL`, `DEFAULT {value}`, `PRIMARY KEY`, and `UNIQUE` to name a few.
 
-### Storing Passwords
+## 🗝️ Storing Passwords
 
-You'll notice that we will be storing a `password_hash` instead of the actual password in the database. Storing passwords in plain text is a bad practice. In the event of a data breach, all your users would be compromised. Instead we will store the result of a hashing function that uses a secret key. Then we can verify the result of future password hashes against the one in the database.
+You'll notice that we will be storing a `password_hash` instead of the actual password in the database. Storing passwords in plain text is a bad practice. In the event of a data breach, all your users would be compromised. Instead we will store the result of a hashing function that uses a secret key, stored as the `SECRET_KEY` secret. Then we can verify the result of future password hashes against the one in the database.
 
 `security.py` provides functions to `hash_password` and verify_password` to assist you. This has been done for you for the Python functions in the following exercises as needed.
 
-### Excerise: Create a `users` table
+## 🧑‍💻 Exercises
 
-Using the CockroachDB SQL Shell (`ccloud cluster sql`), crate a new table that matches the Entity Relationaship diagram below. All fields should be required.
+### 📝 Create a `users` table
+
+Using the Cockroach SQL Shell (`./cli.sh`), create a new table that matches the Entity Relationship diagram below. All fields should be required.
 
 ```mermaid
 erDiagram
@@ -40,7 +42,7 @@ erDiagram
 
 <details> 
 <br>
-<summary>Solution</summary>
+<summary>✅ Solution</summary>
 
 ```SQL
 CREATE TABLE users (
@@ -53,9 +55,9 @@ CREATE TABLE users (
 
 </details>
 
-### Exercise: Import Mock Data from a CSV file
+### 📝 Import Mock Data from a CSV file
 
-Now that we have a `users` tables, let's fill it by importing some mock data from a CSV file. Use the CockroachDB SQL Shell from the previous exercise.
+Now that we have a `users` tables, let's fill it by importing some mock data from a CSV file. Use the Cockroach SQL Shell from the previous exercise.
 
 ```SQL
 IMPORT INTO users (username, full_name, password_hash)

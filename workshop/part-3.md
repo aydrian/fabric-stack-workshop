@@ -1,6 +1,6 @@
 # Part 3: Exploring the Application
 
-## Objectives
+## 💡 Objectives
 
 - Quick intro to SQL
 - Quick intro to PsycoPG 3
@@ -9,7 +9,7 @@
 
 For this workshop, we will use a starter FAbRiC stack application to teach you a core set of SQL statements and how to use them with PsycoPG 3, a PostgreSQL adapter for Python. The application allows a user to register, login, perform some basic and admin functions. It consists of a FastAPI Python backend and a React frontend. Mock data has been provided to allow the application to be functional from the start. Over the course of this workshop, we'll swap out the mocked functions with calls to the database. But first, let us start with a couple short introductions.
 
-## Intro to SQL
+## 🔍 Intro to SQL
 
 As we complete each excercise we'll learn how to use each of the following SQL statements.
 
@@ -22,7 +22,7 @@ As we complete each excercise we'll learn how to use each of the following SQL s
 
 There is a full [Learn CockroachDB SQL](https://www.cockroachlabs.com/docs/cockroachcloud/learn-cockroachdb-sql.html) tutorial located in the docs. [More in depth documentation](https://www.cockroachlabs.com/docs/stable/sql-statements.html) is available and can be used as reference.
 
-## Intro to PsycoPG 3
+## 🐍 Intro to PsycoPG 3
 
 [PsycoPG 3](https://www.psycopg.org/psycopg3/) is a Python library used to connect to a Postgres compatible database (i.e. CockroachDB).
 
@@ -134,51 +134,24 @@ cursor.execute("SELECT * FROM courses WHERE credits > %s", (0,))
 
 For more info about inserting parameters, see [Passing parameters to SQL queries](https://www.psycopg.org/psycopg3/docs/basic/params.html)
 
-## Start the App
+## ▶️ Run the App
 
-In order to run the app, we'll need to start the backend and frontend applications separately. You will need 2 terminal sessions. These can be separate tabs or windows. It's up to you.
+Now that we have everything set up and our Repl configured. You can start the app by clicking the ▶ Run button at the top of your Repl.
 
-### Backend
+The could take some time for the first run and after your Repl sleeps. It will check for the `DATABASE_URL` secret and CA Cert, install all the packages, and generate generate the frontend build folder (if needed). Please be patient. You can watch the progress in the Console.
 
-1. In one terminal session, navigate to `fabric-stack-workshop/backend`
-1. To start the server, run the following:
-   ```shell
-   poetry run python backend/main.py
-   ```
-1. You should see the following:
-   ```shell
-    INFO:     Will watch for changes in these directories: ['/{Your Path}/fabric-stack-workshop/backend']
-    INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-    INFO:     Started reloader process [21306] using WatchFiles
-    INFO:     Started server process [21310]
-    INFO:     Waiting for application startup.
-    INFO:     Application startup complete.
-   ```
+The application is ready when see the following in the Console:
 
-### Frontend
+```shell
+ INFO:     Will watch for changes in these directories: ['/home/runner/{Your Repl Name}/backend']
+ INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+ INFO:     Started reloader process [4622] using WatchFiles
+ INFO:     Started server process [4626]
+ INFO:     Waiting for application startup.
+ INFO:     Application startup complete.
+```
 
-1. In another terminal session, navigate to `fabric-stack-workshop/frontend`
-1. To start the development server, run the following:
-   ```shell
-   npm start
-   ```
-1. You should see the following:
-
-   ```shell
-   Compiled successfully!
-
-   You can now view frontend in the browser.
-
-     Local:            http://localhost:3000
-     On Your Network:  http://{Your IP}:3000
-
-   Note that the development build is not optimized.
-   To create a production build, use npm run build.
-
-   webpack compiled successfully
-   ```
-
-1. In your browser, navigate to http://localhost:3000/
+A Webview tab will open and load the site. You can also grab the url from the Webview and open it in a new browser window or share it.
 
 Take some time to explore the application. You can sign up for a new account or use one of the provided mock users. Every user has the same password: `password1234`. Use the `craig` username to see the admin functionality. Other users include:
 

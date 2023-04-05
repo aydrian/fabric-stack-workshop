@@ -1,22 +1,24 @@
 # Part 5: Update Login and Sign up functions
 
-## Objectives
+## 💡 Objectives
 
 - Learn SQL:
   - Use the `SELECT` statement to aid in login
   - Use the `INSERT` statement to sign up new users
 
-### `SELECT`
+## ℹ️ `SELECT`
 
-### `INSERT`
+## ℹ️ `INSERT`
 
 > **Note**
-> The following exercises involve updating functions in `fabric-stack-workshop/backend/backend/app/database/actions.py`. You should not need to modify any other files.
+> The following exercises involve updating functions in `./backend/backend/app/database/actions.py`. You should not need to modify any other files.
 
 > **Note**
 > Each function provides you with a db argument which is a PsycoPG [Connection class](https://www.psycopg.org/psycopg3/docs/api/connections.html) which can be used to execute sql statements.
 
-### Exercise: `get_user_by_username`
+## 🧑‍💻 Exercises
+
+### 📝 `get_user_by_username`
 
 In order to log in, the user must exist in the database. Update the `get_user_by_username` function to return a single user row containing all fields as a `UserInDB` where the username equals the username passed to the function. If no user is found, return `None`.
 
@@ -24,7 +26,7 @@ _Hint: You can convert an object or dict to a `UserInDB` with `UserInDB.parse_ob
 
 <details> 
 <br>
-<summary>Solution</summary>
+<summary>✅ Solution</summary>
 
 ```python
 @manager.user_loader(conn_provider=get_db)
@@ -59,13 +61,13 @@ def get_user_by_username(
 
 </details>
 
-### Exercise: `create_user`
+### 📝 `create_user`
 
-When someone registers, a new row is inserted into the users table. Update `create_user` to create a new user using the newUser object passed to the function. The password has been hashed for you. Return the new row (with the newly generated id) as a User object.
+When someone registers, a new row is inserted into the users table. Update `create_user` to create a new user using the `newUser` object passed to the function. The password has been hashed for you. Return the new row (with the newly generated id) as a User object.
 
 <details> 
 <br>
-<summary>Solution</summary>
+<summary>✅ Solution</summary>
 
 ```python
 def create_user(newUser: UserRegister, db: Connection) -> User:

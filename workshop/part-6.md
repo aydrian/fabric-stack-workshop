@@ -1,10 +1,12 @@
 # Part 6: Modifying a User
 
-## Objectives
+## 💡 Objectives
 
 - Learn SQL: Use the `UPDATE` statement to modify a user
 
-### Exercise: `update_user`
+## ℹ️ `UPDATE`
+
+## 🧑‍💻 Exercise: `update_user`
 
 In order to handle changing the password on the profile page, we need to be able to update a row in the user table. Update the `update_user` function to update the fields and values passed in the function.
 
@@ -12,7 +14,7 @@ This exercise is a bit more challenging becaues it involves creating a dynamic U
 
 <details> 
 <br>
-<summary>Solution</summary>
+<summary>✅ Solution</summary>
 
 ```python
 def update_user(user_id: str, user: UserUpdate, db: Connection) -> User:
@@ -35,7 +37,7 @@ def update_user(user_id: str, user: UserUpdate, db: Connection) -> User:
 ```
 
 > **_Note_**
-> This solution uses a list comprehension but could also be done with a for loop. There are many correct answers.
+> This solution uses a list comprehension but could also be done with a for loop. There are many correct ways to solve this.
 
 </details>
 
