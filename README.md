@@ -16,7 +16,7 @@ This workshop will walk you through getting started with CockroachDB serverless 
 - Database - 🪳 [CockroachDB](https://www.cockroachlabs.com/)
 - Database Client - 🐘 [Psycopg 3](https://www.psycopg.org/psycopg3/)
 - Web UI - ⚛️ [React](https://react.dev/)
-- Styling - 💄 [CSS Modules](https://github.com/css-modules/css-modules)
+- Styling - 💄 [CSS Modules](https://github.com/css-modules/css-modules) & [Sass](https://sass-lang.com/)
 
 ## ⚠️ Requirements
 
@@ -26,7 +26,7 @@ This workshop will walk you through getting started with CockroachDB serverless 
 ## 📓 Curriculum
 
 - [Part 1: Introduction to CockroachDB and Serverless](workshop/part-1.md)
-- [Part 2: Setup the Dev Environment & CockroachDB serverless](workshop/part-2.md)
+- [Part 2: Setup Replit & CockroachDB serverless](workshop/part-2.md)
 - [Part 3: Exploring the Application](workshop/part-3.md)
 - [Part 4: Prepare the database](workshop/part-4.md)
 - [Part 5: Update Login and Sign up functions](workshop/part-5.md)

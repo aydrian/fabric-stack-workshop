@@ -1,10 +1,23 @@
 # Part 6: Modifying a User
 
-## Objectives
+## 💡 Objectives
 
 - Learn SQL: Use the `UPDATE` statement to modify a user
 
-### Exercise: `update_user`
+## ℹ️ [`UPDATE`](https://www.cockroachlabs.com/docs/stable/update.html)
+
+To update one or many rows in a table, use `UPDATE` followed by the table name and then `SET` with one or more column = value statements separated with a comma. Add a `WHERE` expression to target the row or rows to be modified. If you do not include a where expression, all rows in the table will be updated.
+
+```SQL
+UPDATE {table_name}
+SET {col_name} = {col_value}, ...
+WHERE {expression}; -- Optional
+```
+
+> **Note**
+> This is just one way to write the `UPDATE` statement. [See other examples in the CockroachDB Docs.](https://www.cockroachlabs.com/docs/stable/update.html#update-multiple-columns-in-a-single-row)
+
+## 🧑‍💻 Exercise: `update_user`
 
 In order to handle changing the password on the profile page, we need to be able to update a row in the user table. Update the `update_user` function to update the fields and values passed in the function.
 
@@ -12,7 +25,7 @@ This exercise is a bit more challenging becaues it involves creating a dynamic U
 
 <details> 
 <br>
-<summary>Solution</summary>
+<summary>✅ Solution</summary>
 
 ```python
 def update_user(user_id: str, user: UserUpdate, db: Connection) -> User:
@@ -35,7 +48,7 @@ def update_user(user_id: str, user: UserUpdate, db: Connection) -> User:
 ```
 
 > **_Note_**
-> This solution uses a list comprehension but could also be done with a for loop. There are many correct answers.
+> This solution uses a list comprehension but could also be done with a for loop. There are many correct ways to solve this.
 
 </details>
 
