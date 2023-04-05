@@ -1,4 +1,4 @@
-# Part 5: Update Login and Sign up functions
+# Part 5: Update Login and Sign-Up Functions
 
 ## 💡 Objectives
 
@@ -8,7 +8,7 @@
 
 ## ℹ️ [`SELECT`](https://www.cockroachlabs.com/docs/stable/select-clause.html)
 
-To retrieve rows from a table, use `SELECT` followed by a comma separated list of column names (or `*` for all columns), and then `FROM` followed by a table name. You have the option of adding a `WHERE` clause to filter the results and `ORDER BY` followed by a column name and direction to sort the results.
+To retrieve rows from a table, use `SELECT` followed by a comma-separated list of column names (or `*` for all columns), and then `FROM` followed by a table name. You have the option of adding a `WHERE` clause to filter the results and `ORDER BY` followed by a column name and direction to sort the results.
 
 ```SQL
 SELECT {col_name_1}, {col_name_2}, ... {col_name_n}
@@ -19,7 +19,7 @@ ORDER BY {col_name} {asc | desc}; -- Optional
 
 ## ℹ️ [`INSERT`](https://www.cockroachlabs.com/docs/stable/insert.html)
 
-To add a new row to a table, use `INSERT INTO` followed by the table name and a comma separate list of columns with `VALUES` and a comma separated list of corresponding values. You can add `RETURNING` along with a column name to retreive an value created on insert like an id.
+To add a new row to a table, use `INSERT INTO` followed by the table name and a comma-separated list of columns with `VALUES` and a comma-separated list of corresponding values. You can add `RETURNING` along with a column name to retreive a value created on insert like an id.
 
 ```SQL
 INSERT INTO {table_name} ({col_name_1}, {col_name_2}, ... {col_name_n})
@@ -33,7 +33,7 @@ RETURNING {col_name}; -- Optional
 > The following exercises involve updating functions in `./backend/backend/app/database/actions.py`. You should not need to modify any other files.
 
 > **Note**
-> Each function provides you with a db argument which is a PsycoPG [Connection class](https://www.psycopg.org/psycopg3/docs/api/connections.html) which can be used to execute sql statements.
+> Each function provides you with a db argument that is a PsycoPG [Connection class](https://www.psycopg.org/psycopg3/docs/api/connections.html) which can be used to execute SQL statements.
 
 ### 📝 `get_user_by_username`
 
