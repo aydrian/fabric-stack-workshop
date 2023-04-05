@@ -6,7 +6,7 @@
 - Understand how to store passwords in a database
 - Import data from a CSV file
 
-## ℹ️ `CREATE TABLE`
+## ℹ️ [`CREATE TABLE`](https://www.cockroachlabs.com/docs/stable/create-table.html)
 
 To create a table, use `CREATE TABLE` followed by a table name, the column names, and the data type and constraint, if any, for each column.
 

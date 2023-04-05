@@ -16,6 +16,7 @@ That's it! 🎉 Proceed to the next section.
    <br /><sub>CMD+Click (Mac) or CTRL+Click (Windows/Linux) to open in a new tab.</sub>
    - [Hackabull 2023](http://cockroa.ch/hackabull2023)
    - [Bitcamp 2023](http://cockroa.ch/bitcamp23)
+   - [All Others](https://cockroachlabs.cloud/signup?referralId=fabric_stack_workshop?&utm_source=fabric_stack_workshop&utm_medium=event&utm_campaign=hackathon)
 1. Sign up / Log in (easiest to log in with Github, Google etc)
 1. Create a Free Cluster
    <br /><sub>_If you already have an existing serverless cluster, you can skip to the next section._<sub>

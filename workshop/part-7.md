@@ -7,7 +7,27 @@
   - Use the `ALTER TABLE` statement to add a new column to the users table
   - Use the `SELECT` statement to list all users with a limited set of columns
 
-## ℹ️ `ALTER TABLE`
+## ℹ️ [`ALTER TABLE`](https://www.cockroachlabs.com/docs/stable/alter-table.html)
+
+To change the definition of a table, use the `ALTER TABLE` followed by the table name and any [subcommands](https://www.cockroachlabs.com/docs/stable/alter-table.html#subcommands) to add/remove/change constraints, keys, columns, and more.
+
+**Examples**
+
+```SQL
+/* Rename Table */
+ALTER TABLE dogs
+  RENAME TO good_dogs;
+
+/* Remove Column */
+ALTER TABLE good_dogs
+  DROP COLUMN favorite_treat;
+
+/* Add Unique Constraint */
+ALTER TABLE good_dogs
+  ADD CONSTRAINT name_owner_unique UNIQUE (name, owner);
+```
+
+[More examples](https://www.cockroachlabs.com/docs/stable/alter-table.html#examples) are available in the CockroachDB Documentation.
 
 ## 🧑‍💻 Exercises
 

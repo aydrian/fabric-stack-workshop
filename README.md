@@ -16,7 +16,7 @@ This workshop will walk you through getting started with CockroachDB serverless 
 - Database - 🪳 [CockroachDB](https://www.cockroachlabs.com/)
 - Database Client - 🐘 [Psycopg 3](https://www.psycopg.org/psycopg3/)
 - Web UI - ⚛️ [React](https://react.dev/)
-- Styling - 💄 [CSS Modules](https://github.com/css-modules/css-modules)
+- Styling - 💄 [CSS Modules](https://github.com/css-modules/css-modules) & [Sass](https://sass-lang.com/)
 
 ## ⚠️ Requirements
 

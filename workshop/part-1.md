@@ -16,9 +16,9 @@
 [![Introducing the core concepts behind serverless database.](assets/cru-intro-to-serverless-databases.png)][intro-to-serverless-course]
 
 Interested in learning more about the core concepts behind serverless databases and getting started with CockroachDB serverless? Check out the free self-paced ["Introduction to Serverless Databases and CockroachDB Serverless"][intro-to-serverless-course] course from Cockroach University.
-<br /><sub>\*Free swag may be available upon course completion.</sub>
+<br /><sub>\*Free swag available upon course completion. (while supplies last)</sub>
 
 | [Back](../README.md) | [Next](part-2.md) |
 | -------------------- | ----------------- |
 
-[intro-to-serverless-course]: https://university.cockroachlabs.com/courses/course-v1:crl+intro-to-serverless+self-paced/about
+[intro-to-serverless-course]: https://university.cockroachlabs.com/courses/course-v1:crl+intro-to-serverless+self-paced/about?utm_source=hackathon&utm_medium=event-hackathon-2023&utm_content=cu-course-cu-intro-to-serverless-course
