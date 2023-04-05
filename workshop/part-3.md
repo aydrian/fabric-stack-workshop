@@ -4,7 +4,7 @@
 
 - Quick intro to SQL
 - Quick intro to PsycoPG 3
-- Starting the back-end and front-end applications
+- Starting the application
 - Experience the application features using mocked data
 
 For this workshop, we'll use a starter FAbRiC stack application to teach you a core set of SQL statements and how to use them with PsycoPG 3, a PostgreSQL adapter for Python. The application allows a user to register, log in, and perform some basic and admin functions. It consists of a FastAPI Python back end and a React front end. Mock data has been provided to allow the application to be functional from the start. Over the course of this workshop, we'll swap out the mocked functions with calls to the database. But first, let's start with a couple short introductions.
