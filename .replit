@@ -6,3 +6,26 @@ hidden = [".git", "**/__pycache__", "**/.mypy_cache", "**/*.pyc"]
 
 [nix]
 channel = "stable-22_11"
+
+[env]
+# For cockraoch-sql 22.2.x, remove when 23.1 released
+TERM = "xterm"
+
+# Per-language configuration: python3
+[languages.python3]
+# Treats all files that end with `.py` as Python.
+pattern = "**/*.py"
+
+  # The command needed to start the Language Server Protocol. For
+  # linting and formatting.
+  [languages.python3.languageServer]
+  start = ["pyls"]
+
+# Per-language configuration: JavaScript/TypeScript
+[languages.javascript]
+pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
+
+  [languages.javascript.languageServer]
+  # The command needed to start the Language Server Protocol. For
+  # linting and formatting.
+  start = [ "typescript-language-server", "--stdio" ]
