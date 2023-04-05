@@ -2,7 +2,7 @@
 
 ## 💡 Objectives
 
-- Learn SQL: Use the `DELETE` statement to remove a row from the ussers table
+- Learn SQL: Use the `DELETE` statement to remove a row from the users table
 
 ## ℹ️ `DELETE`
 
@@ -26,11 +26,11 @@ WHERE age > 3 AND breed = 'corgi';
 ```
 
 > **Note**
-> You must include a `WHERE` clause with your `DELETE` statement. If you would like to delete all rows in a table, use `TRUNCATE {table_name};`
+> You must include a `WHERE` clause with your `DELETE` statement. If you'd like to delete all rows in a table, use `TRUNCATE {table_name};`.
 
 ## 🧑‍💻 Exercise: `delete_user`
 
-The Admin Page allows you to delete users by removing their row from the `users` table. Update `delete_user` to delete the row from the `users` table where the `id` matches the `users_id` passed to the function. You do not need to return anything.
+The Admin Page allows you to delete users by removing their row from the `users` table. Update `delete_user` to delete the row from the `users` table where the `id` matches the `users_id` passed to the function. You don't need to return anything.
 
 <details> 
 <br>
