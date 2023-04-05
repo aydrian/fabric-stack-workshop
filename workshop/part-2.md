@@ -36,7 +36,7 @@ We will use the Secrets feature of Replit to hold configuration values. This is 
    ![Connection page](assets/4.png)
 
    > **Warning**
-   > Be sure the pasted connection string includes the password for the sql user. If you see `<ENTER-SQL-USER-PASSWORD>`, replace it with the password you saved. If you didn't save your password, you'll need to generate a new one.
+   > Be sure the pasted connection string includes the password for the SQL user. If you see `<ENTER-SQL-USER-PASSWORD>`, replace it with the password you saved. If you didn't save your password, you'll need to generate a new one.
 
 1. While we're adding secrets, go ahead and add the following:
 
