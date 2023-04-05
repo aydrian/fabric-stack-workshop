@@ -9,7 +9,7 @@
 
 ## ℹ️ [`ALTER TABLE`](https://www.cockroachlabs.com/docs/stable/alter-table.html)
 
-To change the definition of a table, use the `ALTER TABLE` followed by the table name and any [subcommands](https://www.cockroachlabs.com/docs/stable/alter-table.html#subcommands) to add/remove/change constraints, keys, columns, and more.
+To change the definition of a table, use `ALTER TABLE` followed by the table name and any [subcommands](https://www.cockroachlabs.com/docs/stable/alter-table.html#subcommands) to add/remove/change constraints, keys, columns, and more.
 
 **Examples**
 
@@ -27,13 +27,13 @@ ALTER TABLE good_dogs
   ADD CONSTRAINT name_owner_unique UNIQUE (name, owner);
 ```
 
-[More examples](https://www.cockroachlabs.com/docs/stable/alter-table.html#examples) are available in the CockroachDB Documentation.
+[More examples](https://www.cockroachlabs.com/docs/stable/alter-table.html#examples) are available in the CockroachDB Docs.
 
 ## 🧑‍💻 Exercises
 
 ### 📝 Add `is_admin` column to `users` table
 
-This application only has 2 roles, each user either has admin privileges or doesn't. Let's alter the table and add a boolean `is_admin` column to track who can access the admin page. It's probably a good idea to default everyone to being a regular user.
+This application only has 2 roles; each user either has admin privileges or doesn't. Let's alter the table and add a boolean `is_admin` column to track who can access the admin page. It's probably a good idea to default everyone to being a regular user.
 
 Use your Cockroach SQL shell (`./cli.sh`) to execute an `ALTER TABLE` statement to modify your users table.
 
