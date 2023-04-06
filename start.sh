@@ -1,4 +1,12 @@
 #!/bin/sh
+
+## Check for venv
+if [ ! -d "$VIRTUAL_ENV" ]
+then
+  echo "Creating a Python Virtual Environment..."
+  python3 -m venv $VIRTUAL_ENV
+fi
+
 ## Check for DATABASE_URL env var
 if [[ -z "${DATABASE_URL}" ]]
 then
@@ -16,7 +24,7 @@ fi
 ## Build the frontend if it doesn't exist
 if [ ! -d "./frontend/build" ] 
 then
-    echo "Directory /frontend/build DOES NOT exists." 
+    echo "Building the React front end..." 
     cd frontend
     npm install 
     npm run build
@@ -26,4 +34,4 @@ fi
 ## Start FastAPI Server
 cd backend
 poetry install
-poetry run python backend/main.py
+python3 backend/main.py

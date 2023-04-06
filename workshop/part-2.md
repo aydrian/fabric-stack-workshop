@@ -2,9 +2,16 @@
 
 ## 🧑‍💻 Replit
 
-1. Create a new Repl by going to https://replit.new
+We will create a new Repl by forking an existing one
+
+1. Go to the [FAbRiC Stack Workshop](https://replit.com/@cockroachdb/FAbRiC-Stack-Workshop?v=1) Repl by [@CockroachDB](https://replit.com/@cockroachdb)
+   <br /><sup>CMD+click (Mac) or CTRL+click (Windows/Linux) to open in a new tab.</sup>
+1. Click the Fork button
 1. Sign up or log in (if prompted)
-1. Click the Import from GitHub button, enter `github.com/aydrian/fabric-stack-workshop` as the GitHub URL, and click Import from GitHub
+   ![Fork Repl](assets/replit-fork-repl.png)
+1. You can update the Repl Name and Description
+1. Click the Fork Repl button
+   <br /><sub>_It can take a few minutes for your Repl to be created._</sub>
 
 That's it! 🎉 Proceed to the next section.
 
@@ -13,13 +20,13 @@ That's it! 🎉 Proceed to the next section.
 ### 🪄 Create a new serverless cluster
 
 1. Choose one of the links below to get started.
-   <br /><sub>CMD+click (Mac) or CTRL+click (Windows/Linux) to open in a new tab.</sub>
+   <br /><sup>CMD+click (Mac) or CTRL+click (Windows/Linux) to open in a new tab.</sup>
    - [Hackabull 2023](http://cockroa.ch/hackabull2023)
    - [Bitcamp 2023](http://cockroa.ch/bitcamp23)
    - [All Others](https://cockroachlabs.cloud/signup?referralId=fabric_stack_workshop?&utm_source=fabric_stack_workshop&utm_medium=event&utm_campaign=hackathon)
 1. Sign up / log in (easiest to log in with GitHub, Google, etc.)
 1. Create a Free Cluster
-   <br /><sub>_If you already have an existing serverless cluster, you can skip to the next section._<sub>
+   <br /><sub>_If you already have an existing serverless cluster, you can skip to the next section._</sub>
 1. You will be prompted to create a user and password. Click the Generate & save password button.
 
    > **Note**
