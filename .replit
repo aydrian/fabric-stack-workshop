@@ -2,7 +2,7 @@ run = "sh start.sh"
 
 language = "python3"
 entrypoint = "README.md"
-hidden = ["venv", ".config", ".git", "**/__pycache__", "**/.mypy_cache", "**/*.pyc", "node_modules"]
+hidden = ["**/venv", "**/.config", "**/.cache", ".git", "**/__pycache__", "**/.mypy_cache", "**/*.pyc", "**/node_modules"]
 
 [nix]
 channel = "stable-22_11"

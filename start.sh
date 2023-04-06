@@ -3,7 +3,7 @@
 ## Check for venv
 if [ ! -d "$VIRTUAL_ENV" ]
 then
-  echo "Creating Virtual Environment"
+  echo "Creating a Python Virtual Environment..."
   python3 -m venv $VIRTUAL_ENV
 fi
 
@@ -24,7 +24,7 @@ fi
 ## Build the frontend if it doesn't exist
 if [ ! -d "./frontend/build" ] 
 then
-    echo "Directory /frontend/build DOES NOT exists." 
+    echo "Building the React front end..." 
     cd frontend
     npm install 
     npm run build
