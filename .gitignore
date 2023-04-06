@@ -1,1 +1,5 @@
+# binaries
 cockroach-sql
+
+# misc
+.DS_Store

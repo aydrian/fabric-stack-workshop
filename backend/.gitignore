@@ -1,4 +1,12 @@
+# Python
 __pycache__
+
+# Environments
 .env
-env
-test_db.db
+.venv
+env/
+venv/
+ENV/
+
+# misc
+.DS_Store
