@@ -34,3 +34,8 @@ This workshop will walk you through getting started with CockroachDB serverless 
 - [Part 7: Support Admin Users](workshop/part-7.md)
 - [Part 8: Delete a User](workshop/part-8.md)
 - [Part 9: Next Steps](workshop/part-9.md)
+
+## 📝 License
+
+Copyright © 2023 [Cockroach Labs](https://cockroachlabs.com). <br />
+This project is [MIT](./LICENSE) licensed.
