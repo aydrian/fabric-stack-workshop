@@ -8,7 +8,9 @@ We will create a new Repl by forking an existing one
    <br /><sup>CMD+click (Mac) or CTRL+click (Windows/Linux) to open in a new tab.</sup>
 1. Click the Fork button
 1. Sign up or log in (if prompted)
+
    ![Fork Repl](assets/replit-fork-repl.png)
+
 1. You can update the Repl Name and Description
 1. Click the Fork Repl button
    <br /><sub>_It can take a few minutes for your Repl to be created._</sub>
