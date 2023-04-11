@@ -58,6 +58,8 @@ We'll use the Secrets feature of Replit to hold configuration values. This is ho
 
    You should have 3 secrets in total.
 
+## Cockroach CLI
+
 ### 🔐 Add the CA Cert to your Repl
 
 1. On the connection page, change "Select option/language" to "General connection string."
