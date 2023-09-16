@@ -25,6 +25,7 @@ That's it! 🎉 Proceed to the next section.
    <br /><sup>CMD+click (Mac) or CTRL+click (Windows/Linux) to open in a new tab.</sup>
    - [Hackabull 2023](http://cockroa.ch/hackabull2023)
    - [Bitcamp 2023](http://cockroa.ch/bitcamp23)
+   - [Hack the North 2023](https://cockroachlabs.cloud/signup?utm_source=hackthenorth2023&utm_medium=events&utm_campaign=hackathon&referralId=hackathon_hackthenorth2023)
    - [All Others](https://cockroachlabs.cloud/signup?referralId=fabric_stack_workshop?&utm_source=fabric_stack_workshop&utm_medium=event&utm_campaign=hackathon)
 1. Sign up / log in (easiest to log in with GitHub, Google, etc.)
 1. Create a Free Cluster
