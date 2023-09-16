@@ -8,7 +8,7 @@
 - Elastic scale
 - Consumption-based pricing
 - Start for free — no credit card needed
-- 5GB of storage and 250M RUs per month
+- 10GB of storage and 50M RUs per month
 - Use with your favorite language
 
 ## 🎓 Learn more at Cockroach University
